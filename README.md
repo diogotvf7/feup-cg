@@ -4,7 +4,7 @@
 | Name                | Number    | E-Mail                    |
 | ------------------- | --------- | ------------------------- |
 | Diogo Fernandes     | 202108752 | up202108752@edu.fe.up.pt  |
-| João Torre Pereira  | 202108848 | up202108848@edu.fe.up.pt  |
+| João Torre Pereira  | 202108848 | up202108848@fe.up.pt      |
 
 ----
 
