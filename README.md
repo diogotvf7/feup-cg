@@ -1,10 +1,10 @@
 # CG 2023/2024
 
 ## Group T0xG0y
-| Name                | Number    | E-Mail                    |
-| ------------------- | --------- | ------------------------- |
-| Diogo Fernandes     | 202108752 | up202108752@edu.fe.up.pt  |
-| João Torre Pereira  | 202108848 | up202108848@fe.up.pt      |
+| Name                          | Number    | E-Mail                    |
+| ----------------------------- | --------- | ------------------------- |
+| Diogo Tomás Valente Fernandes | 202108752 | up202108752@edu.fe.up.pt  |
+| João Torre Onofre Pereira     | 202108848 | up202108848@fe.up.pt      |
 
 ----
 
