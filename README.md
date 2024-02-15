@@ -1,10 +1,10 @@
 # CG 2023/2024
 
 ## Group T0xG0y
-| Name             | Number    | E-Mail             |
-| ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+| Name                | Number    | E-Mail                    |
+| ------------------- | --------- | ------------------------- |
+| Diogo Fernandes     | 202108752 | up202108752@edu.fe.up.pt  |
+| João Torre Pereira  | 202108848 | up202108848@edu.fe.up.pt  |
 
 ----
 
