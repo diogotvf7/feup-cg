@@ -23,18 +23,30 @@ export class MyInterface extends CGFinterface {
     // Slider element in GUI
     this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
 
-    this.gui.add(this.scene, 'moveX', -5.1, 5.1).name('Move X');
-    this.gui.add(this.scene, 'moveY', -5.1, 5.1).name('Move Y');
-    this.gui.add(this.scene, 'rotation', 0, 360).name('Rotate');
+    // Tangram
+    const tangram = this.gui.addFolder('Tangram');
+    tangram.add(this.scene, 'displayTangram').name('Display Tangram');
+    tangram.add(this.scene, 'tangramX', -10, 10).name('X');
+    tangram.add(this.scene, 'tangramY', -10, 10).name('Y');
+    tangram.add(this.scene, 'tangramZ', -10, 10).name('Z');
+    tangram.open();
 
-    // Checkboxes for Diamond and Triangle
-    const objects = this.gui.addFolder('Objetos');
-    objects.add(this.scene, 'displayTangram').name('Display Tangram');
-    objects.add(this.scene, 'displayQuad').name('Display Quad');
-    objects.add(this.scene, 'displayMyUnitCubeQuad')
+    // MyUnitCube
+    const myUnitCube = this.gui.addFolder('MyUnitCube');
+    myUnitCube.add(this.scene, 'displayMyUnitCube').name('Display MyUnitCube');
+    myUnitCube.add(this.scene, 'unitCubeX', -10, 10).name('X');
+    myUnitCube.add(this.scene, 'unitCubeY', -10, 10).name('Y');
+    myUnitCube.add(this.scene, 'unitCubeZ', -10, 10).name('Z');
+    tangram.open();
+
+
+    // MyUnitCubeQuad
+    const myUnitCubeQuad = this.gui.addFolder('MyUnitCubeQuad');
+    myUnitCubeQuad.add(this.scene, 'displayMyUnitCubeQuad')
         .name('Display MyUnitCubeQuad');
-
-
+    myUnitCubeQuad.add(this.scene, 'unitCubeQuadX', -10, 10).name('X');
+    myUnitCubeQuad.add(this.scene, 'unitCubeQuadY', -10, 10).name('Y');
+    myUnitCubeQuad.add(this.scene, 'unitCubeQuadZ', -10, 10).name('Z');
 
     return true;
   }

@@ -2,7 +2,9 @@ import {CGFaxis, CGFcamera, CGFscene} from '../lib/CGF.js';
 
 import {MyQuad} from './MyQuad.js';
 import {MyTangram} from './MyTangram.js';
+import {MyUnitCube} from './MyUnitCube.js';
 import {MyUnitCubeQuad} from './MyUnitCubeQuad.js';
+
 
 /**
  * MyScene
@@ -31,19 +33,27 @@ export class MyScene extends CGFscene {
 
     this.tangram = new MyTangram(this);
     this.quad = new MyQuad(this);
-    this.myUnitCubeQuad = new MyUnitCubeQuad(this);
+    this.MyUnitCube = new MyUnitCube(this);
+    this.MyUnitCubeQuad = new MyUnitCubeQuad(this);
 
     // Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
 
     this.displayTangram = false;
-    this.displayQuad = false;
-    this.displayMyUnitCubeQuad = true;
+    this.tangramX = 0.00001;
+    this.tangramY = 0.00001;
+    this.tangramZ = 0.00001;
 
-    this.moveX = 0.1;
-    this.moveY = 0.1;
-    this.rotation = 0.1;
+    this.displayMyUnitCubeQuad = false;
+    this.unitCubeQuadX = 0.00001;
+    this.unitCubeQuadY = 0.00001;
+    this.unitCubeQuadZ = 0.00001;
+
+    this.displayMyUnitCube = true;
+    this.unitCubeX = 0.00001;
+    this.unitCubeY = 0.00001;
+    this.unitCubeZ = 0.00001;
   }
   initLights() {
     this.lights[0].setPosition(15, 2, 5, 1);
@@ -61,15 +71,6 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
-  // rotate(deg, x, y, z) {
-  //   this.scene.rotate(this.degToRad(deg), x, y, z);
-  // }
-  // translate() {
-  //   this.scene.translate(this.moveX, this.moveY, this.moveZ);
-  // }
-  // scale() {
-  //   this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-  // }
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -112,12 +113,28 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    // ================================================= Diamond
-
-    // =========================================================
+    // ================================================= Tangram
+    this.pushMatrix();
+    this.translate(this.tangramX, this.tangramY, this.tangramZ);
     if (this.displayTangram) this.tangram.display();
+    this.popMatrix();
+    // =========================================================
+
+    // ========================================== MyUnitCubeQuad
+    this.pushMatrix();
+    this.translate(this.unitCubeQuadX, this.unitCubeQuadY, this.unitCubeQuadZ);
+    if (this.displayMyUnitCubeQuad) this.MyUnitCubeQuad.display();
+    this.popMatrix();
+    // =========================================================
+
+    // ============================================== MyUnitCube
+    this.pushMatrix();
+    this.translate(this.unitCubeX, this.unitCubeY, this.unitCubeZ);
+    if (this.displayMyUnitCube) this.MyUnitCube.display();
+    this.popMatrix();
+    // =========================================================
+
     if (this.displayQuad) this.quad.display();
-    if (this.displayMyUnitCubeQuad) this.myUnitCubeQuad.display();
 
     // ---- END Primitive drawing section
   }

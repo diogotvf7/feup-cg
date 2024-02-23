@@ -45,7 +45,7 @@ export class MyUnitCubeQuad extends CGFobject {
     this.scene.popMatrix();
     // ===============================================
 
-    // ========================================== LeftSide
+    // ====================================== LeftSide
     this.scene.pushMatrix();
     this.scene.translate(1, 0, 0);  // x, y, z
     this.scene.rotate(Math.PI / 2, 0, 1, 0);
@@ -54,7 +54,7 @@ export class MyUnitCubeQuad extends CGFobject {
     // ===============================================
 
 
-    // ========================================== RightSide
+    // ===================================== RightSide
     this.scene.pushMatrix();
     this.scene.translate(-1, 0, 0);  // x, y, z
     this.scene.rotate(Math.PI / 2, 0, -1, 0);
