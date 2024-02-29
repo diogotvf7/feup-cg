@@ -1,6 +1,6 @@
 # CG 2023/2024
 
-## Group T0xG0y
+## Group T09G01
 | Name                          | Number    | E-Mail                    |
 | ----------------------------- | --------- | ------------------------- |
 | Diogo Tomás Valente Fernandes | 202108752 | up202108752@edu.fe.up.pt  |
