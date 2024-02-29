@@ -34,8 +34,8 @@ export class MyInterface extends CGFinterface {
         .name('Selected Material');
 
     // Ambient light slider
-    this.gui.add(this.scene, 'ambientLight', 0.0, 1.0).name('Ambient Light');
-    // .onChange(this.scene.updateAmbientLight.bind(this.scene));
+    this.gui.add(this.scene, 'ambientLight', 0.0, 1.0).name('Ambient Light')
+        .onChange(this.scene.updateAmbientLight.bind(this.scene));
 
 
     // a folder for grouping parameters for one of the lights

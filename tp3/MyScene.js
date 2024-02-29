@@ -3,6 +3,8 @@ import {CGFappearance, CGFaxis, CGFcamera, CGFscene} from '../lib/CGF.js';
 import {MyCone} from './MyCone.js';
 import {MyPlane} from './MyPlane.js';
 import {MyPyramid} from './MyPyramid.js';
+import {MyTangram} from './MyTangram.js';
+import {MyUnitCube} from './MyUnitCube.js';
 
 /**
  * MyScene
@@ -31,11 +33,13 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this, 5);
     this.cone = new MyCone(this, 3, 1);
     this.pyramid = new MyPyramid(this, 3, 1);
+    this.tangram = new MyTangram(this);
+    this.cube = new MyUnitCube(this);
 
-    this.objects = [this.plane, this.pyramid, this.cone];
+    this.objects = [this.plane, this.pyramid, this.cone, this.tangram, this.cube];
 
     // Labels and ID's for object selection on MyInterface
-    this.objectIDs = {'Plane': 0, 'Pyramid': 1, 'Cone': 2};
+    this.objectIDs = {'Plane': 0, 'Pyramid': 1, 'Cone': 2, 'Tangram':3, 'Cube':4 };
 
     // Other variables connected to MyInterface
     this.selectedObject = 0;
@@ -44,10 +48,10 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
     this.objectComplexity = 0.5;
     this.scaleFactor = 2.0;
-    this.ambientLight = 1.0;
   }
   initLights() {
-    this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
+    this.ambientLight = 0.3;
+    this.setGlobalAmbientLight(this.ambientLight, this.ambientLight, this.ambientLight, this.ambientLight);
 
     this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -102,7 +106,7 @@ export class MyScene extends CGFscene {
   }
 
   updateAmbientLight() {
-    this.setGlobalAmbientLight(0.3, 0.3, 0.3, this.ambientLight);
+    this.setGlobalAmbientLight(this.ambientLight, this.ambientLight, this.ambientLight, this.ambientLight);
   }
 
 
@@ -128,27 +132,39 @@ export class MyScene extends CGFscene {
     this.material3.setSpecular(1, 0, 0, 1.0);
     this.material3.setShininess(10.0);
 
+    this.woodMaterial = new CGFappearance(this);
+    this.woodMaterial.setAmbient(0.4, 0.2, 0, 1.0); 
+    this.woodMaterial.setDiffuse(0.3, 0.15, 0, 1.0);
+    this.woodMaterial.setSpecular(0.02, 0.02, 0.02, 1.0);
+
     // Custom material (can be changed in the interface)
     // initially midrange values on ambient, diffuse and specular, on R, G and B
     // respectively
 
+    //this.customMaterialValues = {
+    //  'Ambient': '#0000ff',
+    //  'Diffuse': '#ff0000',
+    //  'Specular': '#000000',
+    //  'Shininess': 10
+    //};
+
     this.customMaterialValues = {
-      'Ambient': '#0000ff',
-      'Diffuse': '#ff0000',
-      'Specular': '#000000',
+      'Ambient': "#03FF00",
+      'Diffuse': "#03FF00",
+      'Specular': "#03FF00",
       'Shininess': 10
-    };
+    }
 
     this.customMaterial = new CGFappearance(this);
 
     this.updateCustomMaterial();
 
     this.materials =
-        [this.material1, this.material2, this.material3, this.customMaterial];
+        [this.material1, this.material2, this.material3, this.customMaterial, this.woodMaterial];
 
     // Labels and ID's for object selection on MyInterface
     this.materialIDs =
-        {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3};
+        {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3, 'Wood': 4};
   }
   display() {
     // ---- BEGIN Background, camera and axis setup

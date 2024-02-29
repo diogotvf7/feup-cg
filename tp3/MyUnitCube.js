@@ -5,37 +5,45 @@ import {CGFobject} from '../lib/CGF.js';
  * @param scene - Reference to MyScene object
  */
 export class MyUnitCube extends CGFobject {
-  constructor(scene) {
+  constructor(scene, nDivs) {
     super(scene);
+    nDivs = typeof nDivs !== 'undefined' ? nDivs : 1;
+
+    this.nDivs = nDivs;
+    this.patchLength = 1.0 / nDivs;
+
     this.initBuffers();
-  }
+}
 
   initBuffers() {
     this.vertices = [
-      -0.5, -0.5, 0.5,   // bot left front
-      0.5,  -0.5, 0.5,   // bot right front
-      0.5,  -0.5, -0.5,  // bot right back
-      -0.5, -0.5, -0.5,  // bot left back
-      -0.5, 0.5,  0.5,   // top left front
-      0.5,  0.5,  0.5,   // top right front
-      0.5,  0.5,  -0.5,  // top right back
-      -0.5, 0.5,  -0.5,  // top left back
+      0.5, 0.5, 0.5,      // 0 
+      0.5, 0.5, -0.5,     // 1
+      0.5, -0.5, 0.5,     // 2
+      0.5, -0.5, -0.5,    // 3
+      -0.5, 0.5, 0.5,     // 4
+      -0.5, 0.5, -0.5,    // 5
+      -0.5, -0.5, 0.5,    // 6
+      -0.5, -0.5, -0.5,   // 7
     ];
 
-    // Counter-clockwise reference of vertices
-    this.indices = [
-      0, 3, 2,  // | Bot face   |
-      2, 1, 0,  // |____________|
-      0, 1, 5,  // | Front face |
-      5, 4, 0,  // |____________|
-      0, 4, 7,  // | Left face  |
-      7, 3, 0,  // |____________|
-      3, 7, 6,  // | Back face  |
-      6, 2, 3,  // |____________|
-      2, 6, 5,  // | Right face |
-      5, 1, 2,  // |____________|
-      4, 5, 6,  // | Top face   |
-      6, 7, 4,  // |____________|
+    this.indices = [            
+      0, 2, 1,
+      1, 2, 3,
+      4, 5, 6,
+      5, 7, 6,
+      0, 4, 6,
+      0, 6, 2,
+      1, 7, 5,
+      1, 3, 7,
+      0, 1, 4,
+      1, 5, 4,
+      2, 6, 7,
+      2, 7, 3,
+    ];
+
+    this.normals = [
+
     ];
 
     // The defined indices (and corresponding vertices)
