@@ -1,0 +1,64 @@
+import { MyPrism } from './MyPrism.js';
+/**
+ * MyTriangleSmall
+ * @constructor
+ * @param scene - Reference to MyScene object
+ */
+export class MyCylinder extends MyPrism {
+  constructor(scene, slices, stacks) {
+    console.log("MyCylinder")
+    super(scene, slices, stacks);
+
+    this.initBuffers();
+  }
+
+  initBuffers() {
+    console.log("MyCylinder.initBuffers")
+    this.vertices = [
+      0, 0, 0,  //
+      0, 0, 1   //
+    ];
+    this.indices = [];
+    this.normals = [
+      0, 0, -1,  //
+      0, 0, 1    //
+    ];
+
+    const angle = 2 * Math.PI / this.slices;
+
+    // Generate the base
+    for (let i = 0; i < this.slices; i++) {
+      const x = Math.cos(i * angle);
+      const y = Math.sin(i * angle);
+
+      this.vertices.push(x, y, 0);
+      this.indices.push(i + 2, 0, (i + 1) % this.slices + 2);
+      const vector = [x, y];
+      const length = Math.sqrt(vector[0]**2 + vector[1]**2)
+      const normalVector = [vector[0] / length, vector[1] / length]
+      this.normals.push(normalVector[0], normalVector[1], 0);
+    }
+
+    // Generate stacks
+    // for (let i = 0;)
+
+    // The defined indices (and corresponding vertices)
+    // will be read in groups of three to draw triangles
+    this.primitiveType = this.scene.gl.TRIANGLES;
+
+    this.initGLBuffers();
+  }
+  /**
+   * Called when user interacts with GUI to change object's complexity.
+   * @param {integer} complexity - changes number of slices
+   */
+  updateBuffers(complexity) {
+    this.slices = 3 +
+        Math.round(
+            9 * complexity);  // complexity varies 0-1, so slices varies 3-12
+
+    // reinitialize buffers
+    this.initBuffers();
+    this.initNormalVizBuffers();
+  }
+}

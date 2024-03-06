@@ -3,6 +3,7 @@ import {CGFappearance, CGFaxis, CGFcamera, CGFscene} from '../lib/CGF.js';
 import {MyCone} from './MyCone.js';
 import {MyPlane} from './MyPlane.js';
 import {MyPrism} from './MyPrism.js';
+import {MyCylinder} from './MyCylinder.js';
 import {MyPyramid} from './MyPyramid.js';
 import {MyTangram} from './MyTangram.js';
 import {MyUnitCube} from './MyUnitCube.js';
@@ -36,10 +37,11 @@ export class MyScene extends CGFscene {
     this.pyramid = new MyPyramid(this, 3, 1);
     this.tangram = new MyTangram(this);
     this.cube = new MyUnitCube(this);
-    this.prism = new MyPrism(this, 4, 1);
+    this.prism = new MyPrism(this, 6, 1);
+    this.cylinder = new MyCylinder(this, 8, 1);
 
     this.objects = [
-      this.plane, this.pyramid, this.cone, this.tangram, this.cube, this.prism
+      this.plane, this.pyramid, this.cone, this.tangram, this.cube, this.prism, this.cylinder
     ];
 
     // Labels and ID's for object selection on MyInterface
@@ -49,7 +51,8 @@ export class MyScene extends CGFscene {
       'Cone': 2,
       'Tangram': 3,
       'Cube': 4,
-      'Prism': 5
+      'Prism': 5,
+      'Cylinder': 6
     };
 
     // Other variables connected to MyInterface
