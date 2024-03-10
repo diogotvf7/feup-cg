@@ -20,6 +20,9 @@ export class MyInterface extends CGFinterface {
     this.gui.add(this.scene, 'displayAxis').name('Display axis');
     this.gui.add(this.scene, 'displayNormals').name('Display normals');
 
+    this.gui.add(this.scene, 'slices', 0, 20).name('Slices');
+    this.gui.add(this.scene, 'stacks', 0, 20).name('Stacks');
+
     // example of a dropdown that has numeric ID's associated,
     // and an event handler to be called when the selection changes
     this.gui.add(this.scene, 'selectedObject', this.scene.objectIDs)
@@ -34,7 +37,8 @@ export class MyInterface extends CGFinterface {
         .name('Selected Material');
 
     // Ambient light slider
-    this.gui.add(this.scene, 'ambientLight', 0.0, 1.0).name('Ambient Light')
+    this.gui.add(this.scene, 'ambientLight', 0.0, 1.0)
+        .name('Ambient Light')
         .onChange(this.scene.updateAmbientLight.bind(this.scene));
 
 

@@ -170,3 +170,35 @@ This was the final result:
 
 
 ## TP 3 Notes
+In this theoretical-practical lesson, we learned how to play with the lights and the light properties of the objects. We also learned how to create the normals of the objects for the specular and diffuse lights to work properly.
+
+### First steps
+Our first task involved playing with the ambient light to see how it affected every object equally. After that, by playing with specular and diffuse lights we were able to see that the reflection of the light is dependent on the light position. We were also asked to create a new material that looked like wood and to apply it to the cube.
+
+### Tangram
+
+| Only ambient light | Only diffuse light |
+| ------------------ | ------------------ |
+| <img src="screenshots/cg-tp09g01tp3-1.png" /> |  <img src="screenshots/cg-tp09g01tp3-2.png" /> | 
+
+### Cube
+
+| Wood Material | 
+| ------------- |
+| <img src="screenshots/cg-tp09g01tp3-3.png" /> |
+
+### Building a prism
+The second task of this TP was to build a prism with all the normals, considering that this prism could have an arbitrary ammount of sides and stacks:
+
+| What was asked | Final result | 
+| -------------- | ------------ |
+| <img src="screenshots/cg-tp09g01tp3-4.png" /> |  <img src="screenshots/cg-tp09g01tp3-5.png" /> | 
+
+
+### Building a cylinder
+The last task of this TP was to build a cylinder with all the normals.
+This task was easier as for each vertex of the sides of the cylinder, the direction of the normal is the same as the radius. 
+
+| What was asked | Final result |
+| -------------- | ------------ |
+| <img src="screenshots/cg-tp09g01tp3-6.png" /> |  <img src="screenshots/cg-tp09g01tp3-7.png" /> | 

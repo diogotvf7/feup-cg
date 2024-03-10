@@ -1,4 +1,4 @@
-import {CGFobject, CGFappearance} from '../lib/CGF.js';
+import {CGFappearance, CGFobject} from '../lib/CGF.js';
 
 import {MyDiamond} from './MyDiamond.js';
 import {MyParallelogram} from './MyParallelogram.js';
@@ -20,11 +20,15 @@ export class MyTangram extends CGFobject {
     this.triangleSmall = new MyTriangleSmall(this.scene);
     this.parallelogram = new MyParallelogram(this.scene);
 
-    const colors = ["purple", "yellow", "red", "green", "pink", "blue", "orange"];
+    const colors =
+        ['purple', 'yellow', 'red', 'green', 'pink', 'blue', 'orange'];
     this.colors = {};
-    colors.forEach((color,) => {
-      this.colors[color] = new CGFappearance(this.scene);
-    })
+    colors.forEach(
+        (
+            color,
+            ) => {
+          this.colors[color] = new CGFappearance(this.scene);
+        });
     // Purple: #AB4EC3
     this.colors.purple.setAmbient(0.67, 0.3, 0.67, 1);
     this.colors.purple.setDiffuse(0.67, 0.3, 0.67, 1);
@@ -56,8 +60,6 @@ export class MyTangram extends CGFobject {
   }
 
   display() {
-    // =========================================================
-
     // ===========================================Triangle Small
     this.scene.pushMatrix();
     this.scene.translate(-3.82, 0.417, 0);
@@ -93,7 +95,7 @@ export class MyTangram extends CGFobject {
     this.scene.popMatrix();
     // =========================================================
 
-     // ================================================ Square (Rotated Diamond)
+    // ================================ Square (Rotated Diamond)
     this.scene.pushMatrix();
     this.scene.multMatrix([
       Math.cos(Math.PI / 4), Math.sin(Math.PI / 4), 0.0, 0.0,
@@ -101,12 +103,12 @@ export class MyTangram extends CGFobject {
       0.0, 0.0, 0.0, 0.0, 1.0
     ]);
     this.scene.customMaterial.apply();
-    //this.colors.green.apply();
+    // this.colors.green.apply();
     this.diamond.display();
     this.scene.popMatrix();
     // =========================================================
 
-    // =============================================Triangle Big
+    // ============================================ Triangle Big
     this.scene.pushMatrix();
     this.scene.translate(2.117, -0.707, 0);
     this.scene.rotate(-Math.PI / 4, 0, 0, 1);
@@ -115,7 +117,7 @@ export class MyTangram extends CGFobject {
     this.scene.popMatrix();
     // =========================================================
 
-    // =============================================Triangle Big
+    // ============================================ Triangle Big
     this.scene.pushMatrix();
     this.scene.translate(4.945, -2.01, 0);
     this.scene.rotate(3 * Math.PI / 4, 0, 0, 1);
@@ -123,7 +125,14 @@ export class MyTangram extends CGFobject {
     this.triangleBig.display();
     this.scene.popMatrix();
     // =========================================================
-
-    
+  }
+  /**
+   * Called when user interacts with GUI to change object's complexity.
+   * @param {integer} complexity - changes number of slices
+   */
+  updateBuffers() {
+    // reinitialize buffers
+    this.initBuffers();
+    this.initNormalVizBuffers();
   }
 }
