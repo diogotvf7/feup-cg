@@ -30,18 +30,17 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
 
-    this.slices = 20;
-    this.stacks = 5;
+    this.complexity = 0.1;
 
     // Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this, 5);
-    this.cone = new MyCone(this, this.slice, this.stacks);
-    this.pyramid = new MyPyramid(this, this.slice, this.stacks);
+    this.cone = new MyCone(this, 5, 5);
+    this.pyramid = new MyPyramid(this, 5, 5);
     this.tangram = new MyTangram(this);
     this.cube = new MyUnitCube(this);
-    this.prism = new MyPrism(this, this.slices, this.stacks);
-    this.cylinder = new MyCylinder(this, 40, 4);
+    this.prism = new MyPrism(this, 5, 5);
+    this.cylinder = new MyCylinder(this, 5, 4);
 
     this.objects = [
       this.plane, this.pyramid, this.cone, this.tangram, this.cube, this.prism,

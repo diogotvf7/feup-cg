@@ -1,10 +1,13 @@
-import {MyPrism} from './MyPrism.js';
+import {CGFobject} from '../lib/CGF.js';
+
+// import {MyPrism} from './MyPrism.js';
+
 /**
  * MyTriangleSmall
  * @constructor
  * @param scene - Reference to MyScene object
  */
-export class MyCylinder extends MyPrism {
+export class MyCylinder extends CGFobject {
   constructor(scene, slices, stacks) {
     super(scene, slices, stacks);
 

@@ -20,13 +20,8 @@ export class MyInterface extends CGFinterface {
     this.gui.add(this.scene, 'displayAxis').name('Display axis');
     this.gui.add(this.scene, 'displayNormals').name('Display normals');
 
-    this.gui.add(this.scene, 'slices', 0, 100)
-        .name('Slices')
-        .onChange(this.scene.updateObjectComplexity.bind(this.scene));
-
-
-    this.gui.add(this.scene, 'stacks', 0, 100)
-        .name('Stacks')
+    this.gui.add(this.scene, 'complexity', 0, 1)
+        .name('Complexity')
         .onChange(this.scene.updateObjectComplexity.bind(this.scene));
 
     // example of a dropdown that has numeric ID's associated,
