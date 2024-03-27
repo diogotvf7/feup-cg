@@ -218,3 +218,7 @@ This task was easier as for each vertex of the sides of the cylinder, the direct
 | Sad teapot |
 | ---------- |
 | <img src="screenshots/cg-t09g01-tp5-3.png"> |
+
+| Water texture and animation |
+| ---------- |
+| <img src="screenshots/cg-t09g01-tp5-4.gif"> |

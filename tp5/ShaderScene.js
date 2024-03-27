@@ -1,7 +1,7 @@
-import {CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFshader, CGFtexture} from '../lib/CGF.js';
+import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFshader, CGFtexture } from '../lib/CGF.js';
 
-import {MyPlane} from './MyPlane.js';
-import {Teapot} from './Teapot.js';
+import { MyPlane } from './MyPlane.js';
+import { Teapot } from './Teapot.js';
 
 /**
  * getStringFromUrl(url)
@@ -61,9 +61,8 @@ export class ShaderScene extends CGFscene {
       'Plane': 1
     }
 
-                      // Materials and textures initialization
-
-                      this.appearance = new CGFappearance(this);
+    // Materials and textures initialization
+    this.appearance = new CGFappearance(this);
     this.appearance.setAmbient(0.3, 0.3, 0.3, 1);
     this.appearance.setDiffuse(0.7, 0.7, 0.7, 1);
     this.appearance.setSpecular(0.0, 0.0, 0.0, 1);
@@ -72,11 +71,12 @@ export class ShaderScene extends CGFscene {
     this.texture = new CGFtexture(this, 'textures/texture.jpg');
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
-
+    
     this.texture2 = new CGFtexture(this, 'textures/FEUP.jpg');
+    this.waterMap = new CGFtexture(this, 'textures/waterMap.jpg');
+    this.waterTexture = new CGFtexture(this, 'textures/waterTex.jpg');
 
     // shaders initialization
-
     this.testShaders = [
       new CGFshader(this.gl, 'shaders/flat.vert', 'shaders/flat.frag'),
       new CGFshader(this.gl, 'shaders/uScale.vert', 'shaders/uScale.frag'),
@@ -84,25 +84,25 @@ export class ShaderScene extends CGFscene {
       new CGFshader(this.gl, 'shaders/texture1.vert', 'shaders/texture1.frag'),
       new CGFshader(this.gl, 'shaders/texture2.vert', 'shaders/texture2.frag'),
       new CGFshader(this.gl, 'shaders/texture3.vert', 'shaders/texture3.frag'),
-      new CGFshader(
-          this.gl, 'shaders/texture3anim.vert', 'shaders/texture3anim.frag'),
+      new CGFshader(this.gl, 'shaders/texture3anim.vert', 'shaders/texture3anim.frag'),
       new CGFshader(this.gl, 'shaders/texture1.vert', 'shaders/sepia.frag'),
-      new CGFshader(
-          this.gl, 'shaders/texture1.vert', 'shaders/convolution.frag'),
+      new CGFshader(this.gl, 'shaders/texture1.vert', 'shaders/convolution.frag'),
       new CGFshader(this.gl, 'shaders/ukraine.vert', 'shaders/ukraine.frag'),
       new CGFshader(this.gl, 'shaders/texture1.vert', 'shaders/grayscale.frag'),
+      new CGFshader(this.gl, 'shaders/water.vert', 'shaders/water.frag'),
     ];
 
     // additional texture will have to be bound to texture unit 1 later, when
     // using the shader, with "this.texture2.bind(1);"
-    this.testShaders[4].setUniformsValues({uSampler2: 1});
-    this.testShaders[5].setUniformsValues({uSampler2: 1});
-    this.testShaders[6].setUniformsValues({uSampler2: 1});
-    this.testShaders[6].setUniformsValues({timeFactor: 0, scaleFactor: 16.0});
+    this.testShaders[4].setUniformsValues({ uSampler2: 1 });
+    this.testShaders[5].setUniformsValues({ uSampler2: 1 });
+    this.testShaders[6].setUniformsValues({ uSampler2: 1 });
+    this.testShaders[6].setUniformsValues({ timeFactor: 0, scaleFactor: 16.0 });
+
+    this.testShaders[11].setUniformsValues({ uSampler2: 1, timeFactor: 0 });
 
 
     // Shaders interface variables
-
     this.shadersList = {
       'Flat Shading': 0,
       'Passing a scale as uniform': 1,
@@ -115,6 +115,7 @@ export class ShaderScene extends CGFscene {
       'Convolution': 8,
       'Ukraine': 9,
       'Grayscale': 10,
+      'Water': 11
     };
 
     // shader code panels references
@@ -136,8 +137,7 @@ export class ShaderScene extends CGFscene {
 
   // configure cameras
   initCameras() {
-    this.camera = new CGFcamera(
-        0.4, 0.1, 500, vec3.fromValues(20, 20, 100), vec3.fromValues(0, 0, 0));
+    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(20, 20, 100), vec3.fromValues(0, 0, 0));
   };
 
   // initialize lights
@@ -191,20 +191,19 @@ export class ShaderScene extends CGFscene {
   // called when the scale factor changes on the interface
   onScaleFactorChanged(v) {
     this.testShaders[this.selectedExampleShader].setUniformsValues(
-        {normScale: this.scaleFactor});
+      { normScale: this.scaleFactor });
   }
 
   // called periodically (as per setUpdatePeriod() in init())
   update(t) {
-    // only shader 6 is using time factor
-    if (this.selectedExampleShader == 6)
+    if (this.selectedExampleShader == 6 || this.selectedExampleShader == 11)
       // Dividing the time by 100 "slows down" the variation (i.e. in 100 ms
       // timeFactor increases 1 unit). Doing the modulus (%) by 100 makes the
       // timeFactor loop between 0 and 99 ( so the loop period of timeFactor is
       // 100 times 100 ms = 10s ; the actual animation loop depends on how
       // timeFactor is used in the shader )
-      this.testShaders[6].setUniformsValues({timeFactor: t / 100 % 100});
-    this.testShaders[6].setUniformsValues({scaleFactor: this.scaleFactor});
+      this.testShaders[this.selectedExampleShader].setUniformsValues({ timeFactor: t / 100 % 100 });
+    this.testShaders[6].setUniformsValues({ scaleFactor: this.scaleFactor });
   }
 
   // main display function
@@ -235,8 +234,14 @@ export class ShaderScene extends CGFscene {
     this.setActiveShader(this.testShaders[this.selectedExampleShader]);
     this.pushMatrix();
 
-    // bind additional texture to texture unit 1
-    this.texture2.bind(1);
+    // Texture binding for the shader that requires it
+    if(this.selectedExampleShader == 11){
+      this.waterTexture.bind(0);
+      this.waterMap.bind(1);
+    }else{
+      this.texture.bind(0);
+      this.texture2.bind(1);
+    }
 
     if (this.selectedObject == 0) {
       // teapot (scaled and rotated to conform to our axis)
