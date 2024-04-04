@@ -27,7 +27,7 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this, 30);
-    this.sphere = new MySphere(this, 8, 8);
+    this.sphere = new MySphere(this, 20, 20);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -40,13 +40,12 @@ export class MyScene extends CGFscene {
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.earthTexture = new CGFtexture(this, "images/earth.jpg");
     this.earthAppearance = new CGFappearance(this);
     this.earthAppearance.setAmbient(0.1, 0.1, 0.1, 1);
     this.earthAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
     this.earthAppearance.setSpecular(0.1, 0.1, 0.1, 1);
     this.earthAppearance.setShininess(10.0);
-    this.earthAppearance.setTexture(this.earthTexture);
+    this.earthAppearance.loadTexture('images/earth.png');
     this.earthAppearance.setTextureWrap('REPEAT', 'REPEAT');
   }
   initLights() {
@@ -95,7 +94,7 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.pushMatrix();
-    this.sphere.enableNormalViz();
+    //this.sphere.enableNormalViz();
     this.earthAppearance.apply();
     this.sphere.display();
     this.popMatrix();
