@@ -8,24 +8,41 @@ import {CGFobject} from '../lib/CGF.js';
  * @param scene - Reference to MyScene object
  */
 export class MySphere extends CGFobject {
-  constructor(scene, slices, stacks) {
+  constructor(scene, slices, stacks, radius = 1, normals_direction = 1) {
     super(scene);
 
     this.slices = slices;
     this.stacks = stacks;
+    this.radius = radius;
+    this.normals_direction = normals_direction;
 
     this.initBuffers();
   }
+
+  normal(x, y, z){
+    // Normalizing the vector
+    x /= this.radius;
+    y /= this.radius;
+    z /= this.radius;
+
+    // Apply direction
+    return [this.normals_direction*x, this.normals_direction*y, this.normals_direction*z];
+  }
+
   initBuffers() {
     this.vertices = [
       0, 1, 0,  // Top vertex
       0, -1, 0  // Bottom vertex
     ];
     this.normals = [
-      0, -1, 0,  // Top normal vertex
-      0, 1, 0  // Bottom normal vertex
+      ...this.normal(0, -1, 0),  // Top normal vertex
+      ...this.normal(0, 1, 0),  // Bottom normal vertex
     ];
     this.indices = [];
+    this.texCoords = [
+      0, 0,
+      1, 1
+    ];
 
     const slice_angle_increment = 2 * Math.PI / this.slices;
 
@@ -35,14 +52,16 @@ export class MySphere extends CGFobject {
         const stack_angle = Math.PI/2 - Math.PI*i/this.stacks;
         const slice_angle = j*slice_angle_increment;
 
-        const x = Math.cos(stack_angle) * Math.sin(slice_angle);
-        const y = Math.sin(stack_angle);
-        const z = Math.cos(stack_angle) * Math.cos(slice_angle);
+        const x = this.radius * Math.cos(stack_angle) * Math.sin(slice_angle);
+        const y = this.radius * Math.sin(stack_angle);
+        const z = this.radius * Math.cos(stack_angle) * Math.cos(slice_angle);
 
         this.vertices.push(x, y, z);
-        this.normals.push(x, y, z);
+        this.normals.push(...this.normal(x, y, z));
+        this.texCoords.push(j/this.slices, i/this.stacks);
       }
     }
+
     // Top Indices (Triangulation)
     for (let i=1; i<this.slices; i++){
       const current_vertex = i
@@ -65,7 +84,11 @@ export class MySphere extends CGFobject {
     }
 
     // Bottom Indices (Triangulation)
-    // TODO:
+    for (let i=0; i<this.slices; i++) {
+      const current_vertex = this.vertices.length / 3 - i - 1;
+      const next_vertex = this.vertices.length / 3 - (i + 1) % this.slices - 1;
+      this.indices.push(1, current_vertex, next_vertex);
+    }
 
     // The defined indices (and corresponding vertices)
     // will be read in groups of three to draw triangles

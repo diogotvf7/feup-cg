@@ -27,7 +27,7 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this, 30);
-    this.sphere = new MySphere(this, 20, 20);
+    this.sphere = new MySphere(this, 20, 20, 20);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -40,13 +40,11 @@ export class MyScene extends CGFscene {
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
+    this.earthTexture = new CGFtexture(this, "images/earth.jpg");
     this.earthAppearance = new CGFappearance(this);
-    this.earthAppearance.setAmbient(0.1, 0.1, 0.1, 1);
-    this.earthAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
-    this.earthAppearance.setSpecular(0.1, 0.1, 0.1, 1);
-    this.earthAppearance.setShininess(10.0);
-    this.earthAppearance.loadTexture('images/earth.png');
+    this.earthAppearance.setTexture(this.earthTexture);
     this.earthAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -59,7 +57,7 @@ export class MyScene extends CGFscene {
       1.0,
       0.1,
       1000,
-      vec3.fromValues(50, 10, 15),
+      vec3.fromValues(5, 5, 5),
       vec3.fromValues(0, 0, 0)
     );
   }
@@ -85,13 +83,13 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    this.pushMatrix();
-    this.appearance.apply();
-    this.translate(0, -100, 0);
-    this.scale(400, 400, 400);
-    this.rotate(-Math.PI / 2.0, 1, 0, 0);
-    this.plane.display();
-    this.popMatrix();
+    //this.pushMatrix();
+    //this.appearance.apply();
+    //this.translate(0, -100, 0);
+    //this.scale(400, 400, 400);
+    //this.rotate(-Math.PI / 2.0, 1, 0, 0);
+    //this.plane.display();
+    //this.popMatrix();
 
     this.pushMatrix();
     //this.sphere.enableNormalViz();

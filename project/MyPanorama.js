@@ -9,7 +9,7 @@ export class MyPanorama {
   constructor(scene, texture) {
     this.scene = scene;
     this.texture = texture;
-    //this.sphere = new MySphere(scene, 20, 20, 200, -1); // slices, stacks, radius, normals direction
+    this.sphere = new MySphere(scene, 20, 20, 200, -1); // slices, stacks, radius, normals direction
   }
 
   display() {
