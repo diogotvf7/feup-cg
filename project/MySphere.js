@@ -3,9 +3,13 @@ import {CGFobject} from '../lib/CGF.js';
 // import {MyPrism} from './MyPrism.js';
 
 /**
- * MyTriangleSmall
+ * MySphere
  * @constructor
  * @param scene - Reference to MyScene object
+ * @param slices - Number of slices around the sphere
+ * @param stacks - Number of stacks along the sphere
+ * @param radius - Sphere radius
+ * @param normals_direction - Direction of normals
  */
 export class MySphere extends CGFobject {
   constructor(scene, slices, stacks, radius = 1, normals_direction = 1) {
@@ -28,6 +32,15 @@ export class MySphere extends CGFobject {
     // Apply direction
     return [this.normals_direction*x, this.normals_direction*y, this.normals_direction*z];
   }
+
+  push_index(a, b, c){
+    if(this.normals_direction == 1){
+      this.indices.push(a, b, c);
+    } else {
+      this.indices.push(a, c, b);
+    }
+  }
+
 
   initBuffers() {
     this.vertices = [
@@ -66,7 +79,7 @@ export class MySphere extends CGFobject {
     for (let i=0; i<this.slices; i++){
       const current_vertex = i
       const next_vertex = (i+1)%this.slices;
-      this.indices.push(0, current_vertex, next_vertex);
+      this.push_index(0, current_vertex, next_vertex);
     }
     
     // Middle Indices
@@ -78,8 +91,8 @@ export class MySphere extends CGFobject {
         const next_stack_vertex = (i + 1) * (this.slices + 1) + j + 2;
         const next_stack_next_vertex = (i + 1) * (this.slices + 1) + (j + 1) % (this.slices + 1) + 2;
     
-        this.indices.push(current_vertex, next_stack_vertex, next_vertex);
-        this.indices.push(next_vertex, next_stack_vertex, next_stack_next_vertex);
+        this.push_index(current_vertex, next_stack_vertex, next_vertex);
+        this.push_index(next_vertex, next_stack_vertex, next_stack_next_vertex);
       }
     }
 
@@ -87,7 +100,7 @@ export class MySphere extends CGFobject {
     for (let i=0; i<this.slices; i++) {
       const current_vertex = this.vertices.length / 3 - i - 1;
       const next_vertex = this.vertices.length / 3 - (i + 1) % this.slices - 1;
-      this.indices.push(1, current_vertex, next_vertex);
+      this.push_index(1, current_vertex, next_vertex);
     }
 
     // The defined indices (and corresponding vertices)
