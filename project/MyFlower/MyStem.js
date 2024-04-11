@@ -1,25 +1,21 @@
 import {CGFappearance, CGFobject} from '../../lib/CGF.js';
 
-// import {MySphere} from './MySphere.js';
-
 /**
  * MyStem
  * @constructor
  * @param scene - Reference to MyScene object
  * @param radius - Radius of the stem cylinders
- * @param height - Height of the stem
+ * @param size - size of the stem
  * @param colour - Colour of the stem
  * @param complexity - Complexity of the cylinders that make up the stem
  */
 export class MyStem extends CGFobject {
-  constructor(scene, radius, height, complexity, colour) {
-    super(scene, radius, height, complexity, colour);
+  constructor(scene, radius, size, complexity) {
+    super(scene);
     // this.scene = scene;
     this.radius = radius;
-    this.height = height;
-    this.colour = colour;
+    this.size = size;
     this.complexity = complexity;
-
 
     // this.apperance = new CGFappearance(scene);
     // this.apperance.setTexture(this.texture);
@@ -44,11 +40,11 @@ export class MyStem extends CGFobject {
       if (i < remainder) {
         // If there are still remaining elements, add a random value within the
         // range [quotient, quotient + 1)
-        value = quotient + Math.random() * 2;
+        value = quotient + Math.random();
       } else {
         // Otherwise, add a random value within the range [quotient, quotient -
         // 1)
-        value = quotient + Math.random() * 2 - 1;
+        value = quotient;
       }
       result.push(value);
       currentSum += value;
@@ -57,34 +53,24 @@ export class MyStem extends CGFobject {
     const sumDifference = sum - currentSum;
     if (sumDifference !== 0) result[n - 1] += sumDifference;
 
-
     return result;
   }
-
   initBuffers() {
     this.vertices = [];
     this.indices = [];
     this.normals = [];
     const angle = 2 * Math.PI / this.complexity;
 
-    // const heights = [];
-    // let sum = 0;
-    // while (sum < this.height) {
-    //   let height = +((Math.random() * (this.height - sum)).toFixed(1));
-    //   heights.push(height);
-    //   sum += height;
-    // }
-    const heights = this.generateArrayWithSum(5, this.height);
-    console.log('heights: ', heights);
+    const sizes = this.generateArrayWithSum(5, this.size);
 
     let baseCenter = [0, 0, 0];
-    for (let h = 0; h < heights.length; h++) {
-      const offsetRadius = Math.random() * heights[h] / 2;
+    for (let h = 0; h < sizes.length; h++) {
+      const offsetRadius = Math.random() * sizes[h] / 2;
       const offsetAngle = Math.random() * 2 * Math.PI;
 
       const topCenter = [
         baseCenter[0] + Math.cos(offsetAngle) * offsetRadius,  //
-        baseCenter[1] + heights[h],                            //
+        baseCenter[1] + sizes[h],                              //
         baseCenter[2] + Math.sin(offsetAngle) * offsetRadius   //
       ];
 
@@ -122,28 +108,10 @@ export class MyStem extends CGFobject {
       baseCenter = topCenter;
     }
 
-    this.primitiveType = this.scene.gl.TRIANGLES;
+    this.topCenter = baseCenter;
 
+    this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
     this.initNormalVizBuffers();
   }
-
-  //   initBuffers() {
-  //     this.vertices = [];
-  //     this.indices = [];
-  //     this.normals = [];
-
-  //     const heights = [];
-  //     let sum = 0;
-  //     while (sum < this.height) {
-  //       let height = Math.floor(Math.random() * height);
-  //       heights.push(height);
-  //       sum += height;
-  //     }
-
-  //     let nextCenter = [0, 0, 0];
-  //     for (const height of heights) {
-  //       nextCenter = this.buildCylinder(nextCenter, height);
-  //     }
-  //   }
 }

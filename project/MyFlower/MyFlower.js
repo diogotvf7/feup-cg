@@ -1,64 +1,98 @@
-import {CGFappearance} from '../../lib/CGF.js';
+import {CGFappearance, CGFobject} from '../../lib/CGF.js';
+import {MySphere} from '../MySphere.js';
 
-// import {MySphere} from './MySphere.js';
+import {MyPetal} from './MyPetal.js';
+import {MyStem} from './MyStem.js';
 
 /**
  * MyFlower
  * @constructor
  * @param scene - Reference to MyScene object
- * @param radius - Radius of the flower
- * @param height - Height of the flower
  */
-export class MyFlower {
-  constructor(scene, radius, height, colour, complexity) {
-    this.scene = scene;
-    this.radius = radius;
-    this.height = height;
-    this.colour = colour;
-    this.complexity = complexity;
+export class MyFlower extends CGFobject {
+  constructor(
+      scene, x, y, z, nPetals, petalColour, heartRadius, heartColour,
+      stemRadius, stemSize, stemColour, leafColour) {
+    super(scene);
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.nPetals = nPetals;
+    this.heartRadius = heartRadius;
+    this.stemRadius = stemRadius;
+    this.stemSize = stemSize;
+
+    this.leafColour = new CGFappearance(scene);
+    this.leafColour.setAmbient(...leafColour, 1);
+    this.leafColour.setDiffuse(...leafColour, 1);
+    this.leafColour.setSpecular(...leafColour, 1);
+
+    this.stemColour = new CGFappearance(scene);
+    this.stemColour.setAmbient(...stemColour, 1);
+    this.stemColour.setDiffuse(...stemColour, 1);
+    this.stemColour.setSpecular(...stemColour, 1);
+
+    this.heartColour = new CGFappearance(scene);
+    this.heartColour.setAmbient(...heartColour, 1);
+    this.heartColour.setDiffuse(...heartColour, 1);
+    this.heartColour.setSpecular(...heartColour, 1);
+
+    this.petalColour = new CGFappearance(scene);
+    this.petalColour.setAmbient(...petalColour, 1);
+    this.petalColour.setDiffuse(...petalColour, 1);
+    this.petalColour.setSpecular(...petalColour, 1);
 
 
-    this.apperance = new CGFappearance(scene);
-    this.apperance.setTexture(this.texture);
-    this.apperance.setTextureWrap('REPEAT', 'REPEAT');
-    this.apperance.setEmission(1, 1, 1, 1);
-
-    this.apperance.setAmbient(0, 0, 0, 0);
-    this.apperance.setDiffuse(0, 0, 0, 0);
-    this.apperance.setSpecular(0, 0, 0, 0);
-    this.apperance.setShininess(0);
-
-    this.cylinderHeights = [];
-    let sum = 0;
-    while (sum < height) {
-      let height = Math.floor(Math.random() * height);
-      this.cylinderHeights.push(height);
-      sum += height;
+    this.stem = new MyStem(
+        this.scene, this.stemRadius, this.stemSize, 30, this.stemColour);
+    this.sphere = new MySphere(this.scene, 20, 20, this.heartRadius, 1);
+    this.petals = [];
+    for (let i = 0; i < this.nPetals; i++) {
+      const angle = Math.random() * Math.PI / 2 + Math.PI / 4;
+      this.petals.push(
+          new MyPetal(this.scene, 1, 1.5, angle, 0.3, this.leafColour));
     }
   }
-
-  buildCylinder(baseCenter, radius, height) {
-    this.vertices = [
-      baseCenter[0], baseCenter[1], baseCenter[2],          //
-      baseCenter[0], baseCenter[1], baseCenter[2] + height  //
-    ];
-    this.indices = [];
-    this.normals = [];
-
-    for (let i = 0; i < 
-
-    const angle = 2 * Math.PI / this.slices;
-  }
-
-  initBuffers() {}
-
-
   display() {
+    // Display the stem
     this.scene.pushMatrix();
-
-    // this.sphere.enableNormalViz();
-    this.apperance.apply();
-
+    this.scene.translate(this.x, this.y, this.z);
+    this.stemColour.apply();
+    this.stem.display();
     this.scene.popMatrix();
+
+    // Display the stamen
+    const stamen_center = [
+      this.stem.topCenter[0],
+      this.stem.topCenter[1],
+      this.stem.topCenter[2],
+    ];
+    this.scene.pushMatrix();
+    this.scene.translate(...stamen_center);
+    this.heartColour.apply();
+    this.sphere.display();
+    this.scene.popMatrix();
+
+    // Display the petals
+    const start = 5 * Math.PI / 4;
+    const step = 7 * Math.PI / 4 / this.nPetals;
+    for (let i = 0; i < this.nPetals; i++) {
+      const petal = this.petals[i];
+      const angle = start + i * step;
+      this.scene.pushMatrix();
+      this.scene.translate(
+          stamen_center[0] +
+              Math.cos(angle + Math.PI / 2) * this.heartRadius,  //
+          stamen_center[1] +
+              Math.sin(angle + Math.PI / 2) * this.heartRadius,  //
+          stamen_center[2],                                      //
+      );
+      this.scene.rotate(angle, 0, 0, 1);
+      this.leafColour.apply();
+      petal.display();
+      this.scene.popMatrix();
+    }
+
+    // this.scene.pushMatrix();
   }
 }
