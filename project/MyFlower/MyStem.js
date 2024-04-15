@@ -15,6 +15,7 @@ export class MyStem extends CGFobject {
     // this.scene = scene;
     this.radius = radius;
     this.size = size;
+
     this.complexity = complexity;
 
     // this.apperance = new CGFappearance(scene);

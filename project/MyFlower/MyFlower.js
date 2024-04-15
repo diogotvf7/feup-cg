@@ -18,6 +18,7 @@ export class MyFlower extends CGFobject {
     this.y = y;
     this.z = z;
     this.nPetals = nPetals;
+
     this.heartRadius = heartRadius;
     this.stemRadius = stemRadius;
     this.stemSize = stemSize;
@@ -45,6 +46,7 @@ export class MyFlower extends CGFobject {
 
     this.stem = new MyStem(
         this.scene, this.stemRadius, this.stemSize, 30, this.stemColour);
+
     this.sphere = new MySphere(this.scene, 20, 20, this.heartRadius, 1);
     this.petals = [];
     for (let i = 0; i < this.nPetals; i++) {
@@ -58,6 +60,7 @@ export class MyFlower extends CGFobject {
     this.scene.pushMatrix();
     this.scene.translate(this.x, this.y, this.z);
     this.stemColour.apply();
+
     this.stem.display();
     this.scene.popMatrix();
 
@@ -69,7 +72,9 @@ export class MyFlower extends CGFobject {
     ];
     this.scene.pushMatrix();
     this.scene.translate(...stamen_center);
+
     this.heartColour.apply();
+
     this.sphere.display();
     this.scene.popMatrix();
 
@@ -89,6 +94,7 @@ export class MyFlower extends CGFobject {
       );
       this.scene.rotate(angle, 0, 0, 1);
       this.leafColour.apply();
+
       petal.display();
       this.scene.popMatrix();
     }

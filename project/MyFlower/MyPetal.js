@@ -98,6 +98,7 @@ export class MyPetal extends CGFobject {
         AB[0] * BC[1] - AB[1] * BC[0],
       ]));
     }
+
     this.normals = [
       ...scaleVector(normals[0], -1),  // 0 Back
       ...scaleVector(normals[0], -1),  // 1 Bottom
