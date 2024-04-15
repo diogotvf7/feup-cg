@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyPanorama } from "./MyPanorama.js";
+import { MyRock } from "./MyRock.js";
 
 /**
  * MyScene
@@ -29,6 +30,7 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 20, 20);
+    this.testRock = new MyRock(this, 15, 15);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -40,6 +42,13 @@ export class MyScene extends CGFscene {
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    //this.rockTexture = new CGFtexture(this, "images/textures/gravel_concrete/gravel_concrete_diff.jpg");
+    this.rockTexture = new CGFtexture(this, "images/textures/lichen/lichen_diff.jpg");
+    this.rockAppearance = new CGFappearance(this);
+    this.rockAppearance.setTexture(this.rockTexture);
+    this.rockAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.rockAppearance.setEmission(0.4, 0.4, 0.4, 1);
 
     this.earthTexture = new CGFtexture(this, "images/earth.jpg");
     this.earthAppearance = new CGFappearance(this);
@@ -100,6 +109,14 @@ export class MyScene extends CGFscene {
     //this.earthAppearance.apply();
     //this.sphere.display();
     //this.popMatrix();
+
+    this.pushMatrix();
+
+    this.rockAppearance.apply();
+    this.testRock.display();
+
+    this.popMatrix();
+
 
     this.panorama.display();
     // ---- END Primitive drawing section
