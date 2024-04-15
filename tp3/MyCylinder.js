@@ -3,7 +3,7 @@ import {CGFobject} from '../lib/CGF.js';
 // import {MyPrism} from './MyPrism.js';
 
 /**
- * MyTriangleSmall
+ * MyCylinder
  * @constructor
  * @param scene - Reference to MyScene object
  */
@@ -41,10 +41,10 @@ export class MyCylinder extends CGFobject {
       const y = Math.sin(i * angle);
 
       const vector = [x, y];
-      const length = Math.sqrt(vector[0] ** 2 + vector[1] ** 2)
-      const normalVector = [vector[0] / length, vector[1] / length]
+      const length = Math.sqrt(vector[0] ** 2 + vector[1] ** 2);
+      const normalVector = [vector[0] / length, vector[1] / length];
 
-          for (let z = 0; z < this.stacks + 1; z++) {
+      for (let z = 0; z < this.stacks + 1; z++) {
         this.vertices.push(x, y, z / this.stacks);
         this.normals.push(normalVector[0], normalVector[1], 0);
       }
