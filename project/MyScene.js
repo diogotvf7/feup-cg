@@ -74,15 +74,6 @@ export class MyScene extends CGFscene {
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    // this.rockTexture = new CGFtexture(this,
-    // "images/textures/gravel_concrete/gravel_concrete_diff.jpg");
-    this.rockTexture =
-        new CGFtexture(this, 'images/textures/lichen/lichen_diff.jpg');
-    this.rockAppearance = new CGFappearance(this);
-    this.rockAppearance.setTexture(this.rockTexture);
-    this.rockAppearance.setTextureWrap('REPEAT', 'REPEAT');
-    this.rockAppearance.setEmission(0.4, 0.4, 0.4, 1);
-
     this.earthTexture = new CGFtexture(this, 'images/earth.jpg');
     this.earthAppearance = new CGFappearance(this);
     this.earthAppearance.setTexture(this.earthTexture);
@@ -139,16 +130,10 @@ export class MyScene extends CGFscene {
     // this.popMatrix();
 
     // this.panorama.display();
-    this.flower.display();
+    //this.flower.display();
     // this.stem.display();
 
-    this.pushMatrix();
-
-    this.rockAppearance.apply();
     this.testRock.display();
-
-    this.popMatrix();
-
 
     this.panorama.display();
     // ---- END Primitive drawing section
