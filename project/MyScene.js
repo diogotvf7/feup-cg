@@ -7,6 +7,7 @@ import {MyPlane} from './MyPlane.js';
 import {MyRock} from './MyRock.js';
 import {MySphere} from './MySphere.js';
 import {Position} from './Position.js';
+import {MyRockSet} from './MyRockSet.js';
 
 /**
  * MyScene
@@ -59,6 +60,7 @@ export class MyScene extends CGFscene {
         this, 0, 0, 0, 5, petalColour, 1, heartColour, 0.5, 4, stemColour,
         leafColour);
     this.testRock = new MyRock(this, new Position(0, 2, 0), 15, 15);
+    this.rockSet = new MyRockSet(this, 4);
     this.stem = new MyStem(this, 3, 10, 20, null);
 
     this.flower = new MyFlower(
@@ -134,7 +136,8 @@ export class MyScene extends CGFscene {
     //this.flower.display();
     // this.stem.display();
 
-    this.testRock.display();
+    //this.testRock.display();
+    this.rockSet.display();
 
     this.panorama.display();
     // ---- END Primitive drawing section
