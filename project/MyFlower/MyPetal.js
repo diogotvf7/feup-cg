@@ -21,7 +21,7 @@ export class MyPetal extends CGFobject {
     this.curvature = curvature;
     this.depth = depth;
 
-    // this.apperance = new CGFappearance(scene);
+    // this.CGFappearance = new CGFappearance(scene);
     // this.apperance.setTexture(this.texture);
     // this.apperance.setTextureWrap('REPEAT', 'REPEAT');
     // this.apperance.setEmission(1, 1, 1, 1);
@@ -30,6 +30,7 @@ export class MyPetal extends CGFobject {
     // this.apperance.setDiffuse(0, 0, 0, 0);
     // this.apperance.setSpecular(0, 0, 0, 0);
     // this.apperance.setShininess(0);
+
     this.initBuffers();
   }
   initBuffers() {
@@ -124,6 +125,36 @@ export class MyPetal extends CGFobject {
       ...normals[1],                   // 0 Back
       ...normals[2],                   // 0 Back
       ...normals[3],                   // 0 Back
+    ];
+
+    this.texCoords = [
+      0.5, 0.5,  // 0 Back
+      0.5, 1,    // 1 Bottom
+      1, 0.5,    // 2 Mid right
+      0.5, 0,    // 3 Top
+      0, 0.5,    // 4 Mid left
+      0.5, 1,    // 5 Bottom
+      1, 0.5,    // 6 Mid right
+      0.5, 0,    // 7 Top
+      0, 0.5,    // 8 Mid left
+      //
+      0, 0, 0,  // 1 Bottom
+      1, 0.5,   // 2 Mid right
+      0.5, 0,   // 3 Top
+      0, 0.5,   // 4 Mid left
+      //
+      0.5, 1,  // 5 Bottom
+      1, 0.5,  // 6 Mid right
+      0.5, 0,  // 7 Top
+      0, 0.5,  // 8 Mid left
+      //
+      0.5, 0.5,  // 9 Back
+      0.5, 0.5,  // 10 Back
+      0.5, 0.5,  // 11 Back
+      0.5, 0.5,  // 12 Back
+      0.5, 0.5,  // 13 Back
+      0.5, 0.5,  // 14 Back
+      0.5, 0.5,  // 15 Back
     ];
 
     this.primitiveType = this.scene.gl.TRIANGLES;

@@ -36,6 +36,7 @@ export class MyStem extends CGFobject {
     this.vertices = [];
     this.indices = [];
     this.normals = [];
+    this.texCoords = [];
     const angle = 2 * Math.PI / this.complexity;
 
     const sizes = generateArrayWithSum(5, this.size);
@@ -67,6 +68,13 @@ export class MyStem extends CGFobject {
             topCenter[0] + x,   // Top x
             topCenter[1],       // Top y
             topCenter[2] + z,   // Top z
+        );
+
+        this.texCoords.push(
+            j / this.complexity,
+            0,  // Base
+            j / this.complexity,
+            1,  // Top
         );
 
         this.normals.push(
