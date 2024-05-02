@@ -25,8 +25,8 @@ export class MyLeaf extends CGFobject {
     this.petioleTop = new MyCone(this.scene, this.petioleRadius, 30, 1, 0.2);
 
     const angle = Math.random() * Math.PI / 2 + Math.PI / 4;
-    this.leaf =
-        new MyPetal(this.scene, this.petalWidth, this.petalHeight, angle, 0.3);
+    this.leaf = new MyPetal(
+        this.scene, this.petalWidth, this.petalHeight, 0, angle, 0.3);
   }
   display() {
     // Display the petiole
@@ -53,8 +53,6 @@ export class MyLeaf extends CGFobject {
 
     this.scene.pushMatrix();
     this.scene.translate(A[0], A[1], A[2]);
-    // this.scene.rotate(Math.acos(AB[0]), 0, 1, 0);
-    // this.scene.rotate(Math.acos(AB[1]), 1, 0, 0);
     this.leaf.display();
     this.scene.popMatrix();
   }

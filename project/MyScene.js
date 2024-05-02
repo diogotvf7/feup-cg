@@ -3,6 +3,7 @@ import {CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFshader, CGFtexture} from
 import {MyFlower} from './MyFlower/MyFlower.js';
 import {MyLeaf} from './MyFlower/MyLeaf.js';
 import {MyStem} from './MyFlower/MyStem.js';
+import {MyGarden} from './MyGarden/MyGarden.js';
 import {MyPanorama} from './MyPanorama.js';
 import {MyPlane} from './MyPlane.js';
 import {MyRock} from './MyRock.js';
@@ -34,34 +35,10 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 20, 20, 3, -1);
-    this.leaf = new MyLeaf(this, 0.1, 1, 1, 1.5);
-
-    const petalColour = [
-      Math.random(),
-      Math.random(),
-      Math.random(),
-    ];
-    const heartColour = [
-      Math.random(),
-      Math.random(),
-      Math.random(),
-    ];
-    const stemColour = [
-      Math.random(),
-      Math.random(),
-      Math.random(),
-    ];
-    const leafColour = [
-      Math.random(),
-      Math.random(),
-      Math.random(),
-    ];
-
-    this.flower = new MyFlower(
-        this, 0, 0, 0, 5, petalColour, 1, heartColour, 0.5, 8, stemColour,
-        leafColour);
+    this.garden = new MyGarden(this, 10, 10, 0.5);
     this.testRock = new MyRock(this, 15, 15);
     this.stem = new MyStem(this, 3, 10, 20, null);
+
 
     // Objects connected to MyInterface
     this.displayAxis = true;
@@ -139,9 +116,7 @@ export class MyScene extends CGFscene {
     // this.popMatrix();
 
     // this.panorama.display();
-    this.flower.display();
-    // this.leaf.display();
-    // this.stem.display();
+    this.garden.display();
 
     // this.pushMatrix();
 

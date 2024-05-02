@@ -13,23 +13,13 @@ import {arraySub, normalizeVector, scaleVector} from '../utils.js';
  * @param complexity - Complexity of the cylinders that make up the stem
  */
 export class MyPetal extends CGFobject {
-  constructor(scene, width, height, curvature, depth) {
+  constructor(scene, width, height, frontDepth, curvature, backDepth) {
     super(scene);
     // this.scene = scene;
     this.width = width;
     this.height = height;
     this.curvature = curvature;
-    this.depth = depth;
-
-    // this.apperance = new CGFappearance(scene);
-    // this.apperance.setTexture(this.texture);
-    // this.apperance.setTextureWrap('REPEAT', 'REPEAT');
-    // this.apperance.setEmission(1, 1, 1, 1);
-
-    // this.apperance.setAmbient(0, 0, 0, 0);
-    // this.apperance.setDiffuse(0, 0, 0, 0);
-    // this.apperance.setSpecular(0, 0, 0, 0);
-    // this.apperance.setShininess(0);
+    this.depth = frontDepth;
     this.initBuffers();
   }
   initBuffers() {
@@ -40,22 +30,22 @@ export class MyPetal extends CGFobject {
       //
       0, 0, 0,                              // 1 Bottom
       this.width / 2, this.height / 2, 0,   // 2 Mid right
-      topX, this.height, 0,                 // 3 Top
+      topX, this.height, this.depth,        // 3 Top
       -this.width / 2, this.height / 2, 0,  // 4 Mid left
       //
       0, 0, 0,                              // 5 Bottom
       this.width / 2, this.height / 2, 0,   // 6 Mid right
-      topX, this.height, 0,                 // 7 Top
+      topX, this.height, this.depth,        // 7 Top
       -this.width / 2, this.height / 2, 0,  // 8 Mid left
       //
       0, 0, 0,                              // 1 Bottom
       this.width / 2, this.height / 2, 0,   // 2 Mid right
-      topX, this.height, 0,                 // 3 Top
+      topX, this.height, this.depth,        // 3 Top
       -this.width / 2, this.height / 2, 0,  // 4 Mid left
       //
       0, 0, 0,                              // 5 Bottom
       this.width / 2, this.height / 2, 0,   // 6 Mid right
-      topX, this.height, 0,                 // 7 Top
+      topX, this.height, this.depth,        // 7 Top
       -this.width / 2, this.height / 2, 0,  // 8 Mid left
       //
       0, this.height / 2, -this.depth,  // 9 Back
@@ -124,6 +114,36 @@ export class MyPetal extends CGFobject {
       ...normals[1],                   // 0 Back
       ...normals[2],                   // 0 Back
       ...normals[3],                   // 0 Back
+    ];
+
+    this.texCoords = [
+      0.5, 0.5,  // 0 Back
+      0.5, 1,    // 1 Bottom
+      1, 0.5,    // 2 Mid right
+      0.5, 0,    // 3 Top
+      0, 0.5,    // 4 Mid left
+      0.5, 1,    // 5 Bottom
+      1, 0.5,    // 6 Mid right
+      0.5, 0,    // 7 Top
+      0, 0.5,    // 8 Mid left
+      //
+      0, 0, 0,  // 1 Bottom
+      1, 0.5,   // 2 Mid right
+      0.5, 0,   // 3 Top
+      0, 0.5,   // 4 Mid left
+      //
+      0.5, 1,  // 5 Bottom
+      1, 0.5,  // 6 Mid right
+      0.5, 0,  // 7 Top
+      0, 0.5,  // 8 Mid left
+      //
+      0.5, 0.5,  // 9 Back
+      0.5, 0.5,  // 10 Back
+      0.5, 0.5,  // 11 Back
+      0.5, 0.5,  // 12 Back
+      0.5, 0.5,  // 13 Back
+      0.5, 0.5,  // 14 Back
+      0.5, 0.5,  // 15 Back
     ];
 
     this.primitiveType = this.scene.gl.TRIANGLES;
