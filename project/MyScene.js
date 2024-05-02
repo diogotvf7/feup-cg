@@ -1,4 +1,4 @@
-import {CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFshader, CGFtexture} from '../lib/CGF.js';
+import {CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture} from '../lib/CGF.js';
 
 import {MyFlower} from './MyFlower/MyFlower.js';
 import {MyLeaf} from './MyFlower/MyLeaf.js';
@@ -8,6 +8,8 @@ import {MyPanorama} from './MyPanorama.js';
 import {MyPlane} from './MyPlane.js';
 import {MyRock} from './MyRock.js';
 import {MySphere} from './MySphere.js';
+import {Position} from './Position.js';
+import {MyRockSet} from './MyRockSet.js';
 
 /**
  * MyScene
@@ -50,15 +52,6 @@ export class MyScene extends CGFscene {
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
-
-    // this.rockTexture = new CGFtexture(this,
-    // "images/textures/gravel_concrete/gravel_concrete_diff.jpg");
-    this.rockTexture =
-        new CGFtexture(this, 'images/textures/lichen/lichen_diff.jpg');
-    this.rockAppearance = new CGFappearance(this);
-    this.rockAppearance.setTexture(this.rockTexture);
-    this.rockAppearance.setTextureWrap('REPEAT', 'REPEAT');
-    this.rockAppearance.setEmission(0.4, 0.4, 0.4, 1);
 
     this.earthTexture = new CGFtexture(this, 'images/earth.jpg');
     this.earthAppearance = new CGFappearance(this);
