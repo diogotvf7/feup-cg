@@ -1,4 +1,4 @@
-import { CGFobject, CGFtexture, CGFappearance } from '../lib/CGF.js';
+import { CGFobject } from '../lib/CGF.js';
 
 /**
  * MySphere
@@ -12,30 +12,19 @@ import { CGFobject, CGFtexture, CGFappearance } from '../lib/CGF.js';
  * @param scaleZ - Scale factor on the z-axis
  */
 export class Object extends CGFobject {
-  constructor(scene) {
+  constructor(scene, position = new Position(0, 0, 0)) {
     super(scene);
     this.scene = scene;
+    this.position = position;
   }
 
   display(){
     this.scene.pushMatrix();
-    this.scene.translate(0, 0, 0); //TODO (thePeras): change this for the intended position
+    this.scene.translate(this.position.x, this.position.y, this.position.z);
     super.display();
     this.scene.popMatrix();
   }
 
-  /**
-   * Called when user interacts with GUI to change object's complexity.
-   * @param {integer} complexity - changes number of slices
-   */
-  upda
-  teBuffers(complexity) {
-    this.slices = 3 +
-      Math.round(
-        9 * complexity);  // complexity varies 0-1, so slices varies 3-12
-
-    // reinitialize buffers
-    this.initBuffers();
-    this.initNormalVizBuffers();
-  }
+  //TODO: (thePeras) Methods to change position
+  //updateTexCoordsGLBuffers
 }

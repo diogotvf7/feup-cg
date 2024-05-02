@@ -1,4 +1,5 @@
-import { CGFobject, CGFtexture, CGFappearance } from '../lib/CGF.js';
+import { CGFtexture, CGFappearance } from '../lib/CGF.js';
+import { Object } from './Object.js';
 
 /**
  * MySphere
@@ -11,9 +12,9 @@ import { CGFobject, CGFtexture, CGFappearance } from '../lib/CGF.js';
  * @param scaleY - Scale factor on the y-axis
  * @param scaleZ - Scale factor on the z-axis
  */
-export class MyRock extends CGFobject {
-  constructor(scene, slices, stacks, radius = 1, scaleX = 1, scaleY = 1, scaleZ = 1) {
-    super(scene);
+export class MyRock extends Object {
+  constructor(scene, position, slices, stacks, radius = 1, scaleX = 1, scaleY = 1, scaleZ = 1) {
+    super(scene, position);
 
     this.scene = scene;
 
@@ -52,7 +53,6 @@ export class MyRock extends CGFobject {
       this.indices.push(a, c, b);
     }
   }
-
 
   initBuffers() {
     this.vertices = [
@@ -129,19 +129,5 @@ export class MyRock extends CGFobject {
     this.scene.scale(this.scaleX, this.scaleY, this.scaleZ);
     super.display();
     this.scene.popMatrix();
-  }
-
-  /**
-   * Called when user interacts with GUI to change object's complexity.
-   * @param {integer} complexity - changes number of slices
-   */
-  updateBuffers(complexity) {
-    this.slices = 3 +
-      Math.round(
-        9 * complexity);  // complexity varies 0-1, so slices varies 3-12
-
-    // reinitialize buffers
-    this.initBuffers();
-    this.initNormalVizBuffers();
   }
 }

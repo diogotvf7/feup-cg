@@ -1,4 +1,4 @@
-import {CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFshader, CGFtexture} from '../lib/CGF.js';
+import {CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture} from '../lib/CGF.js';
 
 import {MyFlower} from './MyFlower/MyFlower.js';
 import {MyStem} from './MyFlower/MyStem.js';
@@ -6,6 +6,7 @@ import {MyPanorama} from './MyPanorama.js';
 import {MyPlane} from './MyPlane.js';
 import {MyRock} from './MyRock.js';
 import {MySphere} from './MySphere.js';
+import {Position} from './Position.js';
 
 /**
  * MyScene
@@ -57,7 +58,7 @@ export class MyScene extends CGFscene {
     this.flower = new MyFlower(
         this, 0, 0, 0, 5, petalColour, 1, heartColour, 0.5, 4, stemColour,
         leafColour);
-    this.testRock = new MyRock(this, 15, 15);
+    this.testRock = new MyRock(this, new Position(0, 2, 0), 15, 15);
     this.stem = new MyStem(this, 3, 10, 20, null);
 
     this.flower = new MyFlower(
