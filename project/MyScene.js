@@ -38,7 +38,8 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 20, 20, 3, -1);
     this.garden = new MyGarden(this, 10, 10, 0.5);
-    this.testRock = new MyRock(this, 15, 15);
+    this.rock = new MyRock(this, new Position(-5, 0, 0), 20, 20);
+    this.rockSet = new MyRockSet(this, 4);
     this.stem = new MyStem(this, 3, 10, 20, null);
 
 
@@ -108,13 +109,14 @@ export class MyScene extends CGFscene {
     // this.sphere.display();
     // this.popMatrix();
 
-    // this.panorama.display();
-    this.garden.display();
+    this.panorama.display();
+    // this.garden.display();
 
     // this.pushMatrix();
 
     // this.rockAppearance.apply();
-    // this.testRock.display();
+    this.rockSet.display();
+    this.rock.display();
 
     // this.popMatrix();
 
