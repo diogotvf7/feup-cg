@@ -12,7 +12,7 @@ import {CGFobject} from '../lib/CGF.js';
 export class MySphere extends CGFobject {
   constructor(
       scene, slices, stacks, radius = 1, normals_direction = 1, flatX = 1,
-      flatY = 1) {
+      flatY = 1, nortHemisphereScale = 1, southHemisphereScale = 1) {
     super(scene);
 
     this.slices = slices;
@@ -21,6 +21,8 @@ export class MySphere extends CGFobject {
     this.normals_direction = normals_direction;
     this.flatX = flatX;
     this.flatY = flatY;
+    this.nortHemisphereScale = nortHemisphereScale;
+    this.southHemisphereScale = southHemisphereScale;
 
     this.initBuffers();
   }
@@ -68,10 +70,8 @@ export class MySphere extends CGFobject {
         const slice_angle = j * slice_angle_increment;
 
         const x = this.radius * Math.cos(stack_angle) * Math.sin(slice_angle);
-        const y = this.radius * Math.sin(stack_angle) * this.flatY;
-        // const y = (stack_angle == 0) ?
-        //   this.radius / 2 :
-        //   this.radius * Math.sin(stack_angle) * this.flatY
+        let y = this.radius * Math.sin(stack_angle) * this.flatY;
+        y *= stack_angle >= 0 ? this.nortHemisphereScale : this.southHemisphereScale;
         const z = this.radius * Math.cos(stack_angle) * Math.cos(slice_angle);
 
         this.vertices.push(x, y, z);

@@ -10,6 +10,7 @@ import {MyRock} from './MyRock.js';
 import {MySphere} from './MySphere.js';
 import {Position} from './Position.js';
 import {MyRockSet} from './MyRockSet.js';
+import { MyPollen } from './MyPollen.js';
 
 /**
  * MyScene
@@ -41,7 +42,7 @@ export class MyScene extends CGFscene {
     this.rock = new MyRock(this, new Position(-5, 0, 0), 20, 20);
     this.rockSet = new MyRockSet(this, 4);
     this.stem = new MyStem(this, 3, 10, 20, null);
-
+    this.pollen = new MyPollen(this, new Position(0, 0, 0), 1);
 
     // Objects connected to MyInterface
     this.displayAxis = true;
@@ -115,8 +116,9 @@ export class MyScene extends CGFscene {
     // this.pushMatrix();
 
     // this.rockAppearance.apply();
-    this.rockSet.display();
-    this.rock.display();
+    //this.rockSet.display();
+    //this.rock.display();
+    this.pollen.display();
 
     // this.popMatrix();
 
