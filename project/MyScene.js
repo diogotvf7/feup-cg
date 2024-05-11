@@ -11,6 +11,8 @@ import {MySphere} from './MySphere.js';
 import {Position} from './Position.js';
 import {MyRockSet} from './MyRockSet.js';
 import { MyPollen } from './MyPollen.js';
+import { MyGrassBlade } from './MyGrass/MyGrassBlade.js';
+import { MyGrassSquare } from './MyGrass/MyGrassSquare.js';
 
 /**
  * MyScene
@@ -43,6 +45,8 @@ export class MyScene extends CGFscene {
     this.rockSet = new MyRockSet(this, 4);
     this.stem = new MyStem(this, 3, 10, 20, null);
     this.pollen = new MyPollen(this, new Position(0, 0, 0), 1);
+    this.grassBlade = new MyGrassBlade(this, new Position(0, 0, 0));
+    this.grass = new MyGrassSquare(this, new Position(0, 0, 0), 30, 30);
 
     // Objects connected to MyInterface
     this.displayAxis = true;
@@ -62,6 +66,8 @@ export class MyScene extends CGFscene {
 
     this.panoramaTexture = new CGFtexture(this, 'images/panorama.jpg');
     this.panorama = new MyPanorama(this, this.panoramaTexture);
+
+    this.setUpdatePeriod(50);
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -118,12 +124,18 @@ export class MyScene extends CGFscene {
     // this.rockAppearance.apply();
     //this.rockSet.display();
     //this.rock.display();
-    this.pollen.display();
+    //this.pollen.display();
+
+    this.grass.display();
 
     // this.popMatrix();
 
 
     // this.panorama.display();
     // ---- END Primitive drawing section
+  }
+
+  update(t) {
+    this.grass.update(t);
   }
 }
