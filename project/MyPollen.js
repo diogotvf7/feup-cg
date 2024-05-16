@@ -1,5 +1,5 @@
 import { MySphere } from './MySphere.js';
-import { CGFappearance, CGFtexture } from '../lib/CGF.js';
+import { CGFappearance } from '../lib/CGF.js';
 
 export class MyPollen extends MySphere {
   constructor(scene, position, radius = 1) {
@@ -10,8 +10,6 @@ export class MyPollen extends MySphere {
     this.appearance.setAmbient(1, 1, 0, 1);
     this.appearance.setDiffuse(1, 1, 0, 1);
     this.appearance.setSpecular(0, 0, 0, 1);
-
-    this.initBuffers();
   }
 
   display(){

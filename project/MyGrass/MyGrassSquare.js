@@ -24,12 +24,9 @@ export class MyGrassSquare extends Object {
     bladeAppearance.setTexture(bladeTexture);
     bladeAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.texture = new CGFtexture(scene, 'images/textures/grass-soil.jpg');
-    this.appearance.setTexture(this.texture);
-    this.appearance.setTextureWrap('REPEAT', 'REPEAT');
-
     this.shader = new CGFshader(this.scene.gl, './MyGrass/grass.vert', './MyGrass/grass.frag');
-    this.shader.setUniformsValues({ timeFactor: 0, uSampler: 0 });
+    this.shader.setUniformsValues({ timeFactor: 0, uSampler2: 1 });
+    bladeTexture.bind(1);
 
     this.grassBlades = [];
     const n = width * height * 10;
@@ -40,36 +37,8 @@ export class MyGrassSquare extends Object {
         Math.random() * this.height - this.height / 2
       ), bladeAppearance));
     }
-
-    this.initBuffers();
   }
 
-  initBuffers() {
-
-    this.vertices = [
-        -this.width / 2, 0, -this.height/2,
-        this.width / 2, 0, -this.height/2, 
-        -this.width / 2, 0, this.height/2,
-        this.width / 2, 0, this.height/2,
-    ];
-    this.indices = [
-        0, 1, 2,
-        1, 3, 2,
-
-        2, 1, 0,
-        2, 3, 1,
-    ];
-
-    this.texCoords = [
-        0, 0,
-        1, 0,
-        0, 1,
-        1, 1,
-    ];
-
-    this.primitiveType = this.scene.gl.TRIANGLES;
-    this.initGLBuffers();
-  }
 
   display() {
     this.scene.pushMatrix(); 

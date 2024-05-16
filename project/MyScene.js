@@ -13,6 +13,7 @@ import {MyRockSet} from './MyRockSet.js';
 import { MyPollen } from './MyPollen.js';
 import { MyGrassBlade } from './MyGrass/MyGrassBlade.js';
 import { MyGrassSquare } from './MyGrass/MyGrassSquare.js';
+import { MyHive } from './MyHive.js';
 
 /**
  * MyScene
@@ -47,6 +48,7 @@ export class MyScene extends CGFscene {
     this.pollen = new MyPollen(this, new Position(0, 0, 0), 1);
     this.grassBlade = new MyGrassBlade(this, new Position(0, 0, 0));
     this.grass = new MyGrassSquare(this, new Position(0, 0, 0), 30, 30);
+    this.hive = new MyHive(this, new Position(0, 0, 0), 5, 10);
 
     // Objects connected to MyInterface
     this.displayAxis = true;
@@ -127,6 +129,7 @@ export class MyScene extends CGFscene {
     //this.pollen.display();
 
     this.grass.display();
+    //this.hive.display();
 
     // this.popMatrix();
 
