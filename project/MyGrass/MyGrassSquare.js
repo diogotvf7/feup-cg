@@ -11,48 +11,32 @@ export class MyGrassSquare extends Object {
     this.width = width;
     this.height = height;
 
-    this.appearance = new CGFappearance(scene);
-    this.appearance.setEmission(0.9, 0.9, 0.9, 1);
-    this.appearance.setAmbient(0.6, 0.6, 0.6, 1);
-    this.appearance.setDiffuse(0.6, 0.6, 0.6, 1);
-
-    const bladeAppearance = new CGFappearance(scene);
-    bladeAppearance.setEmission(0.9, 0.9, 0.9, 1);
-    bladeAppearance.setAmbient(0.6, 0.6, 0.6, 1);
-    bladeAppearance.setDiffuse(0.6, 0.6, 0.6, 1);
-    const bladeTexture = new CGFtexture(scene, 'images/textures/flower-heart.jpg');
-    bladeAppearance.setTexture(bladeTexture);
-    bladeAppearance.setTextureWrap('REPEAT', 'REPEAT');
-
-    this.shader = new CGFshader(this.scene.gl, './MyGrass/grass.vert', './MyGrass/grass.frag');
-    this.shader.setUniformsValues({ timeFactor: 0, uSampler2: 1 });
-    bladeTexture.bind(1);
 
     this.grassBlades = [];
-    const n = width * height * 10;
+    //const n = width * height * 10;
+    const n = 5;
     for (let i = 0; i < n; i++) {
       this.grassBlades.push(new MyGrassBlade(this.scene, new Position(
         Math.random() * this.width - this.width / 2,
         0,
         Math.random() * this.height - this.height / 2
-      ), bladeAppearance));
+      )));
     }
   }
 
 
   display() {
     this.scene.pushMatrix(); 
-    this.scene.setActiveShader(this.shader);
+    //this.scene.setActiveShader(this.shader);
+    //this.bladeTexture.bind(0);
     for (let i = 0; i < this.grassBlades.length; i++) {
       this.grassBlades[i].display();
     }
-    this.scene.setActiveShader(this.scene.defaultShader);
-    //this.appearance.apply();
-    //super.display();
+    //this.scene.setActiveShader(this.scene.defaultShader);
     this.scene.popMatrix();
   }
 
   update(t) {
-    this.shader.setUniformsValues({ timeFactor: t / 100 % 360 });
+    //this.shader.setUniformsValues({ timeFactor: t / 100 % 360 });
   }
 }

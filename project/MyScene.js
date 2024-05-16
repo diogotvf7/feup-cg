@@ -47,7 +47,7 @@ export class MyScene extends CGFscene {
     this.stem = new MyStem(this, 3, 10, 20, null);
     this.pollen = new MyPollen(this, new Position(0, 0, 0), 1);
     this.grassBlade = new MyGrassBlade(this, new Position(0, 0, 0));
-    this.grass = new MyGrassSquare(this, new Position(0, 0, 0), 30, 30);
+    this.grass = new MyGrassSquare(this, new Position(0, -50, 0), 30, 30);
     this.hive = new MyHive(this, new Position(0, 0, 0), 5, 10);
 
     // Objects connected to MyInterface
