@@ -4,7 +4,7 @@ import {MyFlower} from './MyFlower/MyFlower.js';
 import {MyLeaf} from './MyFlower/MyLeaf.js';
 import {MyStem} from './MyFlower/MyStem.js';
 import {MyGarden} from './MyGarden/MyGarden.js';
-import {MyPanorama} from './MyPanorama.js';
+import {MyPanorama} from './MyPanorama/MyPanorama.js';
 import {MyPlane} from './MyPlane.js';
 import {MyRock} from './MyRock.js';
 import {MySphere} from './MySphere.js';
@@ -66,8 +66,7 @@ export class MyScene extends CGFscene {
     this.earthAppearance.setTexture(this.earthTexture);
     this.earthAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.panoramaTexture = new CGFtexture(this, 'images/panorama.jpg');
-    this.panorama = new MyPanorama(this, this.panoramaTexture);
+    this.panorama = new MyPanorama(this);
 
     this.setUpdatePeriod(50);
   }
@@ -140,5 +139,6 @@ export class MyScene extends CGFscene {
 
   update(t) {
     this.grass.update(t);
+    this.panorama.update(t);
   }
 }
