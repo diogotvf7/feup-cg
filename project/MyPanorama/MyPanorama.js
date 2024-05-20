@@ -32,21 +32,22 @@ export class MyPanorama {
   }
 
   display() {
+    this.scene.pushMatrix();
+
     this.scene.setActiveShader(this.shader);
     this.cloudsTexture.bind(1);
     this.textureMap.bind(2);
-    this.scene.pushMatrix();
 
     this.apperance.apply();
     this.sphere.display();
 
-    this.scene.popMatrix();
     this.scene.setActiveShader(this.scene.defaultShader);
+
+    this.scene.popMatrix();
   }
 
   update() {
     this.timeFactor += 0.09;
-    //this.timeFactor = this.timeFactor % 1000.0;
     this.shader.setUniformsValues({ timeFactor: this.timeFactor  });
   }
 }

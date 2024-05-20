@@ -1,27 +1,13 @@
-import { CGFappearance, CGFtexture, CGFshader } from '../../lib/CGF.js';
 import { Object } from '../Object.js';
-
 
 export class MyGrassBlade extends Object {
   constructor(scene, position) {
     super(scene, position);
 
-    this.width = 0.3 + Math.random() * 0.4;
+    this.width = 0.2 + Math.random() * 0.2;
     this.height = 0.6 + Math.random() * 2;
 
     this.rotation = Math.random() * Math.PI;
-
-    this.appearance = new CGFappearance(scene);
-    this.appearance.setEmission(0.9, 0.9, 0.9, 1);
-    this.appearance.setAmbient(0.6, 0.6, 0.6, 1);
-    this.appearance.setDiffuse(0.6, 0.6, 0.6, 1);
-
-    this.texture = new CGFtexture(scene, 'images/textures/wood_hive.jpg');
-    this.appearance.setTexture(this.texture);
-    this.appearance.setTextureWrap('REPEAT', 'REPEAT');
-
-    this.shader = new CGFshader(this.scene.gl, './MyGrass/grass.vert', './MyGrass/grass.frag');
-    this.shader.setUniformsValues({ timeFactor: 0, uSampler: 0});
 
     this.initBuffers();
   }
@@ -63,13 +49,11 @@ export class MyGrassBlade extends Object {
   }
 
   display() {
-    this.scene.pushMatrix(); 
+    this.scene.pushMatrix();
+
     this.scene.rotate(this.rotation, 0, 1, 0);
-    this.scene.setActiveShader(this.shader);
-    this.texture.bind(0);
     super.display();
-    this.scene.setActiveShader(this.scene.defaultShader);
-    
+
     this.scene.popMatrix();
   }
 }

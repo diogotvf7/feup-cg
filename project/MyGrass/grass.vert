@@ -12,14 +12,12 @@ uniform float timeFactor;
 varying vec2 vTextureCoord;
 
 void main() {
-	vec4 position = vec4(aVertexPosition, 1.0);
-	position = uPMatrix * uMVMatrix * position;
+    vec4 position = vec4(aVertexPosition, 1.0);
+
+    position.x += sin(timeFactor + aVertexPosition.y) * 0.05 * aVertexPosition.y;
 	
-	if (position.y > 0.3) {
-		position.x = position.x + sin(timeFactor * 0.1) * 0.2;
-		position.y = position.y + sin(timeFactor * 0.1) * 0.2;
-	}
-
-	gl_Position = position;
+    position = uPMatrix * uMVMatrix * position;
+    vTextureCoord = aTextureCoord;
+    
+    gl_Position = position;
 }
-
