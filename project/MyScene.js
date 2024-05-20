@@ -1,16 +1,16 @@
-import {CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture} from '../lib/CGF.js';
+import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from '../lib/CGF.js';
 
-import {MyFlower} from './MyFlower/MyFlower.js';
-import {MyLeaf} from './MyFlower/MyLeaf.js';
-import {MyStem} from './MyFlower/MyStem.js';
-import {MyGarden} from './MyGarden/MyGarden.js';
-import {MyPanorama} from './MyPanorama/MyPanorama.js';
-import {MyPlane} from './MyPlane.js';
-import {MyRock} from './MyRock.js';
-import {MySphere} from './MySphere.js';
-import {MyBee} from './MyBee/MyBee.js';
-import {Position} from './Position.js';
-import {MyRockSet} from './MyRockSet.js';
+import { MyFlower } from './MyFlower/MyFlower.js';
+import { MyLeaf } from './MyFlower/MyLeaf.js';
+import { MyStem } from './MyFlower/MyStem.js';
+import { MyGarden } from './MyGarden/MyGarden.js';
+import { MyPanorama } from './MyPanorama/MyPanorama.js';
+import { MyPlane } from './MyPlane.js';
+import { MyRock } from './MyRock.js';
+import { MySphere } from './MySphere.js';
+import { MyBee } from './MyBee/MyBee.js';
+import { Position } from './Position.js';
+import { MyRockSet } from './MyRockSet.js';
 import { MyPollen } from './MyPollen.js';
 import { MyGrassBlade } from './MyGrass/MyGrassBlade.js';
 import { MyGrassSquare } from './MyGrass/MyGrassSquare.js';
@@ -41,7 +41,7 @@ export class MyScene extends CGFscene {
     // Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this, 30);
-    this.sphere = new MySphere(this, 20, 20, 3, -1);
+    this.sphere = new MySphere(this, 20, 20, 1, -1);
     this.garden = new MyGarden(this, 10, 10, 0.5);
     this.rock = new MyRock(this, new Position(-5, 0, 0), 20, 20);
     this.rockSet = new MyRockSet(this, 4);
@@ -49,12 +49,13 @@ export class MyScene extends CGFscene {
     this.bee = new MyBee(this);
     this.pollen = new MyPollen(this, new Position(0, 0, 0), 1);
     this.grassBlade = new MyGrassBlade(this, new Position(0, 0, 0));
-    this.grass = new MyGrassSquare(this, new Position(0, -50, 0), 30, 30);
+    this.grass = new MyGrassSquare(this, new Position(0, -100, 0), 30, 30);
     this.hive = new MyHive(this, new Position(0, 0, 0), 5, 10);
 
     // Objects connected to MyInterface
     this.displayAxis = true;
-    this.scaleFactor = 1;
+    this.beeScale = 1;
+    this.beeSpeed = 1;
 
     this.enableTextures(true);
 
@@ -144,5 +145,19 @@ export class MyScene extends CGFscene {
   update(t) {
     this.grass.update(t);
     this.panorama.update(t);
+    this.bee.update(t);
+    const pressedKeys = this.gui.getPressedKeys();
+    if(pressedKeys.length > 0) {
+      console.log("Keys pressed: " + pressedKeys);
+    }
   }
+
+  updateBeeSpeed() {
+    this.bee.updateSpeed(this.beeSpeed);
+  }
+
+  updateBeeScale() {
+    this.bee.updateScale(this.beeScale);
+  }
+
 }
