@@ -42,14 +42,11 @@ export class MyBee extends CGFobject {
     this.abdomen.display();
     this.torax.display();
     this.head.display();    
-   
-    this.scene.popMatrix();
+    this.antennae.display();
   }
-
   turn(angle){
     this.orientation_xz += angle;
   }
-
   accelerate(value){
     this.speed += value;
   }
@@ -59,7 +56,6 @@ export class MyBee extends CGFobject {
       this.speed = 0;
     }
   }
-
   update(t){
     this.time = (t % 1000) / 1000;
     this.position.y = this.position.y + 0.2 * Math.sin(2*Math.PI * this.time);

@@ -132,7 +132,7 @@ export class MyScene extends CGFscene {
     //this.rock.display();
     //this.pollen.display();
 
-    this.grass.display();
+    // this.grass.display();
     //this.hive.display();
 
     // this.popMatrix();
