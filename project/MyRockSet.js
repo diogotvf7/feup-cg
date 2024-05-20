@@ -1,5 +1,6 @@
 import { CGFobject } from '../lib/CGF.js';
 import { MyRock } from './MyRock.js';
+import { Position } from './Position.js';
 
 
 // import {MyPrism} from './MyPrism.js';
@@ -19,19 +20,23 @@ export class MyRockSet extends CGFobject {
 
     this.rocks = []
 
+    // generate number_of_rocks, starting from 0, 0, 0 position and going up, scaling down the scaleX and scaleZ
+    let current_y = 0;
+    let scale = 2;
+    let size = 2;
     for (let i = 0; i < number_of_rocks; i++) {
-      this.rocks.push(new MyRock(scene, 15, 15, 2, 1, 1, 1));
+      this.rocks.push(new MyRock(scene, new Position(0, current_y, 0), 20, 10, size, scale, 1, scale));
+      current_y += size*1.5;
+      if(scale - 0.3 > 1) scale -= 0.3;
+      size -= 0.4;
     }
   }
 
   display() {
     this.scene.pushMatrix();
 
-    for (let i = 0; i < this.number_of_rocks; i++) {
-      this.scene.translate(Math.random() * 10 - 5, 0, Math.random() * 10 - 5);
-      this.scene.scale(0.5, 0.5, 0.5);
-      this.scene.rotate(Math.random() * 2 * Math.PI, 0, 1, 0);
-      this.scene.rock.display();
+    for (let rock of this.rocks) {
+      rock.display();
     }
 
     this.scene.popMatrix();
