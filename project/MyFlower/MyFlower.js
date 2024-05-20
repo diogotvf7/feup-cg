@@ -15,11 +15,6 @@ export class MyFlower extends CGFobject {
       scene, nPetals, petalColour, heartRadius, heartColour, stemRadius,
       stemSize, stemColour, leafColour) {
     super(scene);
-    console.log(
-        'MyFlower:', '\n nPetals: ', nPetals, '\n petalColour: ', petalColour,
-        '\n heartRadius:', heartRadius, '\n heartColour:', heartColour,
-        '\n stemRadius:', stemRadius, '\n stemSize:', stemSize,
-        '\n stemColour:', stemColour, '\n leafColour:', leafColour);
 
     this.nPetals = nPetals;
     this.petalColour = petalColour;

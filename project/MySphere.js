@@ -67,11 +67,8 @@ export class MySphere extends CGFobject {
         const stack_angle = Math.PI / 2 - Math.PI * i / this.stacks;
         const slice_angle = j * slice_angle_increment;
 
-        const x = this.radius * Math.cos(stack_angle) * Math.sin(slice_angle);
+        const x = this.radius * Math.cos(stack_angle) * Math.sin(slice_angle) * this.flatX;
         const y = this.radius * Math.sin(stack_angle) * this.flatY;
-        // const y = (stack_angle == 0) ?
-        //   this.radius / 2 :
-        //   this.radius * Math.sin(stack_angle) * this.flatY
         const z = this.radius * Math.cos(stack_angle) * Math.cos(slice_angle);
 
         this.vertices.push(x, y, z);

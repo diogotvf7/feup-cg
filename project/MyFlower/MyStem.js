@@ -42,7 +42,6 @@ export class MyStem extends CGFobject {
     const sizes = generateArrayWithSum(5, this.size);
     const leafsHeights = this.selectRandomHeightsForLeaf(sizes, this.size);
     this.leafs = [];
-    console.log('leafsHeights: ', leafsHeights);
 
     let baseCenter = [0, 0, 0];
     for (let h = 0; h < sizes.length; h++) {

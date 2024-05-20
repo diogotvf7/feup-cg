@@ -54,6 +54,47 @@ const generateArrayWithSum =
       return result;
     }
 
+    const deCasteljau = (points, position = 0.5) => {
+      let a, b, midpoints = [];
+      while (points.length > 1) {
+        const num = points.length - 1;
+        for (let i = 0; i < num; ++i) {
+          a = points[i];
+          b = points[i + 1];
+          midpoints.push([
+            a[0] + ((b[0] - a[0]) * position),
+            a[1] + ((b[1] - a[1]) * position),
+          ]);
+        }
+        points = midpoints;
+        midpoints = [];
+      }
+    
+      // Calculate the tangent vectors at the given point and its neighboring points
+      const tangentA = [points[0][0] - a[0], points[0][1] - a[1]];
+      const tangentB = [b[0] - points[0][0], b[1] - points[0][1]];
+    
+      // Average the tangent vectors to get an approximation of the normal vector
+      const normal = [(tangentA[0] + tangentB[0]) / 2, (tangentA[1] + tangentB[1]) / 2];
+    
+      // Normalize the normal vector
+      const length = Math.sqrt(normal[0] ** 2 + normal[1] ** 2);
+      const normalizedNormal = [normal[0] / length, normal[1] / length];
+    
+      return {
+        point: points[0],
+        tangentA,
+        tangentB,
+        normal: normalizedNormal
+      };
+    };
+
 export {
-  arraySum, arraySub, normalizeVector, scaleVector, generateArrayWithSum, getDir
+  arraySum, 
+  arraySub, 
+  normalizeVector, 
+  scaleVector, 
+  generateArrayWithSum, 
+  getDir, 
+  deCasteljau,
 }

@@ -48,8 +48,6 @@ export class MyGarden extends CGFobject {
                     ))  //
                 :
                 null));
-
-    console.log(this.flowerMx);
   }
   display() {
     for (let i = 0; i < this.height; i++) {
