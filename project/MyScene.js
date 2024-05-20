@@ -146,10 +146,6 @@ export class MyScene extends CGFscene {
     this.grass.update(t);
     this.panorama.update(t);
     this.bee.update(t);
-    const pressedKeys = this.gui.getPressedKeys();
-    if(pressedKeys.length > 0) {
-      console.log("Keys pressed: " + pressedKeys);
-    }
   }
 
   updateBeeSpeed() {

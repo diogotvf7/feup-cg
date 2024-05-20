@@ -10,6 +10,9 @@ export class MyInterface extends CGFinterface {
         this.keys = {
             "w": "KeyW",
             "s": "KeyS",
+            "a": "KeyA",
+            "d": "KeyD",
+            "r": "KeyR",
         };
     }
 
