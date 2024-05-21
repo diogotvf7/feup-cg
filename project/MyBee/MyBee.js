@@ -59,6 +59,8 @@ export class MyBee extends CGFobject {
     this.antennae.display();
 
     if (this.pollen) this.pollen.display();
+
+    this.scene.popMatrix();
   }
   turn(angle){
     this.orientation_xz += angle;

@@ -43,9 +43,9 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 20, 20, 1, -1);
     this.garden = new MyGarden(this, 10, 10, 0.5);
+
     this.rock = new MyRock(this, new Position(-5, 0, 0), 20, 20);
     this.rockSet = new MyRockSet(this, 4);
-    this.stem = new MyStem(this, 3, 10, 20, null);
 
     this.pollen = new MyPollen(this, new Position(0, 0, 0), 1);
     this.grass = new MyGrassSquare(this, new Position(0, -100, 0), 30, 30);
@@ -53,7 +53,7 @@ export class MyScene extends CGFscene {
 
     this.bee = new MyBee(this, this.garden, this.hive);
 
-    // Objects connected to MyInterface
+    // MyInterface Vars
     this.displayAxis = true;
     this.beeScale = 1;
     this.beeSpeed = 1;
@@ -73,6 +73,7 @@ export class MyScene extends CGFscene {
 
     this.panorama = new MyPanorama(this);
 
+    // Update every 50ms
     this.setUpdatePeriod(50);
   }
   initLights() {
@@ -108,39 +109,23 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    // this.pushMatrix();
-    // this.appearance.apply();
-    // this.translate(0, -100, 0);
-    // this.scale(400, 400, 400);
-    // this.rotate(-Math.PI / 2.0, 1, 0, 0);
-    // this.plane.display();
-    // this.popMatrix();
-
-    // this.pushMatrix();
-    // this.sphere.enableNormalViz();
-    // this.earthAppearance.apply();
-    // this.sphere.display();
-    // this.popMatrix();
-
-    // this.garden.display();
-    this.bee.display();
     this.panorama.display();
+    
+    this.rockSet.display();
+    
+    
+    this.rock.display();
+    
     this.garden.display();
-
-    // this.pushMatrix();
-
-    // this.rockAppearance.apply();
-    //this.rockSet.display();
-    //this.rock.display();
-    //this.pollen.display();
-
-    this.grass.display();
+    
     this.hive.display();
+    this.grass.display();
+    
+    this.bee.display();
 
-    // this.popMatrix();
+    this.plane.enableNormalViz();
+    this.plane.display();
 
-
-    // this.panorama.display();
     // ---- END Primitive drawing section
   }
 
