@@ -46,16 +46,18 @@ export class MyScene extends CGFscene {
     this.rock = new MyRock(this, new Position(-5, 0, 0), 20, 20);
     this.rockSet = new MyRockSet(this, 4);
     this.stem = new MyStem(this, 3, 10, 20, null);
-    this.bee = new MyBee(this);
+
     this.pollen = new MyPollen(this, new Position(0, 0, 0), 1);
-    this.grassBlade = new MyGrassBlade(this, new Position(0, 0, 0));
     this.grass = new MyGrassSquare(this, new Position(0, -100, 0), 30, 30);
-    this.hive = new MyHive(this, new Position(0, 0, 0), 5, 10);
+    this.hive = new MyHive(this, new Position(30, 0, 30), 5, 10);
+
+    this.bee = new MyBee(this, this.garden, this.hive);
 
     // Objects connected to MyInterface
     this.displayAxis = true;
     this.beeScale = 1;
     this.beeSpeed = 1;
+    this.cameraPerspective = 0;
 
     this.enableTextures(true);
 
@@ -123,7 +125,7 @@ export class MyScene extends CGFscene {
     // this.garden.display();
     this.bee.display();
     this.panorama.display();
-    // this.garden.display();
+    this.garden.display();
 
     // this.pushMatrix();
 
@@ -133,7 +135,7 @@ export class MyScene extends CGFscene {
     //this.pollen.display();
 
     this.grass.display();
-    //this.hive.display();
+    this.hive.display();
 
     // this.popMatrix();
 

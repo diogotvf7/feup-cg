@@ -120,6 +120,9 @@ export class MyHive extends Object {
     super(scene, position);
     this.scene = scene;
 
+    this.pollens = [];
+    this.dropPollenSound = new Audio('audios/coin_drop.mp3');
+
     this.base = base;
     this.height = height;
 
@@ -138,11 +141,14 @@ export class MyHive extends Object {
     this.honeyKeppers.push(new HoneyKepper(scene, new Position(pos.x, pos.y + (height/3)*2, pos.z), base, height/3, 0));
   }
 
-
-
   display(){
     this.honeyKeppers.forEach(honeyKepper => {
       honeyKepper.display();
     });
+  }
+
+  dropPollen(pollen){
+    this.pollens.push(pollen);
+    this.dropPollenSound.play();
   }
 }

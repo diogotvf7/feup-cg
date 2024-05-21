@@ -12,4 +12,8 @@ export class Position {
         this.y = y;
         this.z = z;
     }
+
+    distance(pos) {
+        return Math.sqrt((this.x - pos.x) ** 2 + (this.y - pos.y) ** 2 + (this.z - pos.z) ** 2);
+    }
 }
