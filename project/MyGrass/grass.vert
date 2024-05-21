@@ -14,7 +14,7 @@ varying vec2 vTextureCoord;
 void main() {
     vec4 position = vec4(aVertexPosition, 1.0);
 
-    position.x += sin(timeFactor + aVertexPosition.y) * 0.05 * aVertexPosition.y;
+    position.x += sin(timeFactor*0.5 + aVertexPosition.y) * 0.05 * aVertexPosition.y;
 	
     position = uPMatrix * uMVMatrix * position;
     vTextureCoord = aTextureCoord;

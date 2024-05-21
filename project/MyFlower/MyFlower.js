@@ -90,7 +90,6 @@ export class MyFlower extends CGFobject {
       this.stem.topCenter[1],
       this.stem.topCenter[2],
     ];
-    console.log("STAMEN:", stamen_center);
     this.pollen = new MyPollen(scene, new Position(position.x + this.stem.topCenter[0], position.y+stemSize, position.z + this.stem.topCenter[2]), 0.2);
   }
   display() {

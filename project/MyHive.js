@@ -122,6 +122,7 @@ export class MyHive extends Object {
 
     this.pollens = [];
     this.dropPollenSound = new Audio('audios/coin_drop.mp3');
+    this.dropPollenSound.volume = 0.5;
 
     this.base = base;
     this.height = height;
@@ -133,6 +134,13 @@ export class MyHive extends Object {
     
     this.texture = new CGFtexture(scene, 'images/textures/wood_hive.jpg');
     this.appearance.setTexture(this.texture);
+
+    this.sound = new Audio('audios/hive.mp3');
+    this.sound.oncanplay = () => {
+      this.sound.loop = true;
+      this.sound.volume = 0;
+      this.sound.play();
+    }
 
     this.honeyKeppers = [];
     let pos = position;
@@ -150,5 +158,17 @@ export class MyHive extends Object {
   dropPollen(pollen){
     this.pollens.push(pollen);
     this.dropPollenSound.play();
+  }
+
+  checkVolume(beePosition){
+    let x = this.position.x - beePosition.x;
+    let z = this.position.z - beePosition.z;
+    let distance = Math.sqrt(x*x + z*z);
+
+    if(distance < 13){
+      this.sound.volume = 1 - distance/13;
+    }else{
+      this.sound.volume = 0;
+    }
   }
 }

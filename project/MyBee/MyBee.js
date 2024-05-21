@@ -42,6 +42,13 @@ export class MyBee extends CGFobject {
     this.target = null;
 
     this.pick_audio = new Audio('audios/pick.mp3');
+    this.pick_audio.volume = 0.5;
+    this.bee_sound = new Audio('audios/bee_flying.mp3');
+    this.bee_sound.oncanplay = () => {
+      this.bee_sound.loop = true;
+      this.bee_sound.volume = 0.04;
+      this.bee_sound.play();
+    }
   }
 
   display() {
@@ -137,6 +144,9 @@ export class MyBee extends CGFobject {
       this.position.x += this.speed * Math.sin(this.orientation_xz);
       this.position.z += this.speed * Math.cos(this.orientation_xz);
     }
+
+    this.hive.checkVolume(this.position)
+
   }
 
   updateScale(s) {
@@ -159,7 +169,6 @@ export class MyBee extends CGFobject {
 
   moveToTarget(target) {
     const targetPosition = new Position(target.position.x, target.position.y, target.position.z);
-    console.log(targetPosition)
 
     if (target instanceof MyFlower) {
       targetPosition.y += target.stemSize;

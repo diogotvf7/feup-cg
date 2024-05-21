@@ -73,6 +73,14 @@ export class MyScene extends CGFscene {
 
     this.panorama = new MyPanorama(this);
 
+    this.nature_sound = new Audio('audios/nature.mp3');
+    this.nature_sound.oncanplay = () => {
+      this.nature_sound.loop = true;
+      this.nature_sound.volume = 0.3;
+      this.nature_sound.play();
+    }
+
+
     // Update every 50ms
     this.setUpdatePeriod(50);
   }
