@@ -2,9 +2,9 @@ import {CGFappearance, CGFobject, CGFtexture} from '../../lib/CGF.js';
 import { MyAbdomen } from './MyAbdomen.js';
 import { MyTorax } from './MyTorax.js';
 import { MyHead } from './MyHead.js';
-import { MyAntennae } from './MyAntennae.js';
 import { Object } from '../Object.js';
 import { Position } from '../Position.js';
+import { MyLegs } from './MyLegs.js';
 
 /**
  * MyBee
@@ -18,7 +18,7 @@ export class MyBee extends CGFobject {
     this.abdomen = new MyAbdomen(scene);
     this.torax = new MyTorax(scene);
     this.head = new MyHead(scene);
-    this.antennae = new MyAntennae(scene);
+    this.legs = new MyLegs(scene);
 
     this.scale = 2;
     this.speed = 0;
@@ -34,15 +34,16 @@ export class MyBee extends CGFobject {
     this.scene.pushMatrix();
 
     // Transformations
-    this.scene.translate(this.position.x, this.position.y, this.position.z);
-    this.scene.rotate(this.orientation_xz, 0, 1, 0); // Rotate the bee based on orientation
-    this.scene.scale(this.scale, this.scale, this.scale);
+    // this.scene.translate(this.position.x, this.position.y, this.position.z);
+    // this.scene.rotate(this.orientation_xz, 0, 1, 0); // Rotate the bee based on orientation
+    // this.scene.scale(this.scale, this.scale, this.scale);
 
     // Body displayments
-    this.abdomen.display();
-    this.torax.display();
     this.head.display();    
-    this.antennae.display();
+    // this.abdomen.display();
+    // this.torax.display();
+    // this.antennae.display();
+    // this.legs.display();
   }
   turn(angle){
     this.orientation_xz += angle;

@@ -89,6 +89,10 @@ const generateArrayWithSum =
 
     const rad_to_deg = (radians) => radians * (180 / Math.PI);
     
+    const rgbToQuofficient = (rgb) => {
+      return rgb.map(val => val / 255);
+    }
+
 export {
   arraySum, 
   arraySub, 
@@ -98,4 +102,5 @@ export {
   getDir, 
   deCasteljau,
   rad_to_deg,
+  rgbToQuofficient,
 }

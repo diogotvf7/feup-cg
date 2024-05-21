@@ -106,20 +106,6 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    // this.pushMatrix();
-    // this.appearance.apply();
-    // this.translate(0, -100, 0);
-    // this.scale(400, 400, 400);
-    // this.rotate(-Math.PI / 2.0, 1, 0, 0);
-    // this.plane.display();
-    // this.popMatrix();
-
-    // this.pushMatrix();
-    // this.sphere.enableNormalViz();
-    // this.earthAppearance.apply();
-    // this.sphere.display();
-    // this.popMatrix();
-
     // this.garden.display();
     this.bee.display();
     this.panorama.display();
@@ -137,15 +123,13 @@ export class MyScene extends CGFscene {
 
     // this.popMatrix();
 
-
-    // this.panorama.display();
     // ---- END Primitive drawing section
   }
 
   update(t) {
     this.grass.update(t);
     this.panorama.update(t);
-    this.bee.update(t);
+    // this.bee.update(t);
   }
 
   updateBeeSpeed() {

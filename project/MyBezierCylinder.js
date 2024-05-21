@@ -2,11 +2,11 @@ import {CGFobject} from '../lib/CGF.js';
 import { deCasteljau, getDir, rad_to_deg } from './utils.js';
 
 /**
- * MyCylinder
+ * MyBezierCylinder
  * @constructor
  * @param scene - Reference to MyScene object
  */
-export class MyCylinder extends CGFobject {
+export class MyBezierCylinder extends CGFobject {
   constructor(scene, radius, axis, radius_coefficient, slices = 20, stacks = 20) {
     super(scene);
     this.radius = radius;
@@ -27,14 +27,17 @@ export class MyCylinder extends CGFobject {
 
     const angle = 2 * Math.PI / this.slices;
     let path;
-    for (let i = 0; i < this.stacks; i += 1) {
+    for (let i = 0; i <= this.stacks; i += 1) {
       path = deCasteljau(this.axis, i / this.stacks);
       const center = path.point;
+
+      console.log(`[${i / this.stacks * 100}]% ---> [${center[0]}, ${center[1]}]`);
+
       const normal = path.normal;
       const normal_angle = Math.atan2(normal[0], normal[1]);      
 
       const radius = this.radius * deCasteljau(this.radius_coefficient, i / this.stacks).point[0];
-      
+
       const offset = i * this.slices;
 
       for (let j = 0; j < this.slices; j++) {
@@ -46,11 +49,11 @@ export class MyCylinder extends CGFobject {
         this.normals.push(...getDir([center[0], center[1], 0], [x, y, z]));
         this.texCoords.push(j / this.slices, i / this.stacks);
 
-        if (i < this.stacks - 1) {
+        if (i <= this.stacks - 1) {
           this.indices.push(offset + j + this.slices, offset + (j + 1) % this.slices, offset + j);
           this.indices.push(offset + this.slices + (j + 1) % this.slices, offset + (j + 1) % this.slices, offset + j + this.slices);
         }
-        if (i == this.stacks - 1) {
+        if (i == this.stacks) {
           this.indices.push(offset + (j + 1) % this.slices, offset + j, offset + this.slices - 1);
         }
       }      
