@@ -79,10 +79,14 @@ const generateArrayWithSum =
     
       // Normalize the normal vector
       const length = Math.sqrt(normal[0] ** 2 + normal[1] ** 2);
-      const normalizedNormal = [normal[0] / length, normal[1] / length];
-    
+      const normalizedNormal = length 
+        ? [normal[0] / length, normal[1] / length] 
+        : [0, 1]; // If the normal vector is the zero vector, default to [0, 1]
+
       return {
         point: points[0],
+        tangentA,
+        tangentB,
         normal: normalizedNormal
       };
     };
