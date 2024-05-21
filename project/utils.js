@@ -83,12 +83,12 @@ const generateArrayWithSum =
     
       return {
         point: points[0],
-        tangentA,
-        tangentB,
         normal: normalizedNormal
       };
     };
 
+    const rad_to_deg = (radians) => radians * (180 / Math.PI);
+    
 export {
   arraySum, 
   arraySub, 
@@ -97,4 +97,5 @@ export {
   generateArrayWithSum, 
   getDir, 
   deCasteljau,
+  rad_to_deg,
 }

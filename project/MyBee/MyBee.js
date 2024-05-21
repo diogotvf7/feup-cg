@@ -55,19 +55,15 @@ export class MyBee extends CGFobject {
     // Body displayments
     this.abdomen.display();
     this.torax.display();
-    this.head.display();
+    this.head.display();    
+    this.antennae.display();
 
-    // Pollen
     if (this.pollen) this.pollen.display();
-
-    this.scene.popMatrix();
   }
-
-  turn(angle) {
+  turn(angle){
     this.orientation_xz += angle;
   }
-
-  accelerate(value) {
+  accelerate(value){
     this.speed += value;
   }
 
@@ -77,8 +73,7 @@ export class MyBee extends CGFobject {
       this.speed = 0;
     }
   }
-
-  update(t) {
+  update(t){
     this.time = (t % 1000) / 1000;
 
     const pressedKeys = this.scene.gui.getPressedKeys();
