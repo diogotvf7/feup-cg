@@ -1,8 +1,4 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from '../lib/CGF.js';
-
-import { MyFlower } from './MyFlower/MyFlower.js';
-import { MyLeaf } from './MyFlower/MyLeaf.js';
-import { MyStem } from './MyFlower/MyStem.js';
 import { MyGarden } from './MyGarden/MyGarden.js';
 import { MyPanorama } from './MyPanorama/MyPanorama.js';
 import { MyPlane } from './MyPlane.js';
@@ -43,19 +39,21 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 20, 20, 1, -1);
     this.garden = new MyGarden(this, 10, 10, 0.5);
+
     this.rock = new MyRock(this, new Position(-5, 0, 0), 20, 20);
     this.rockSet = new MyRockSet(this, 4);
-    this.stem = new MyStem(this, 3, 10, 20, null);
-    this.bee = new MyBee(this);
-    this.pollen = new MyPollen(this, new Position(0, 0, 0), 1);
-    this.grassBlade = new MyGrassBlade(this, new Position(0, 0, 0));
-    this.grass = new MyGrassSquare(this, new Position(0, -100, 0), 30, 30);
-    this.hive = new MyHive(this, new Position(0, 0, 0), 5, 10);
 
-    // Objects connected to MyInterface
+    this.pollen = new MyPollen(this, new Position(0, 0, 0), 1);
+    this.grass = new MyGrassSquare(this, new Position(0, -100, 0), 30, 30);
+    this.hive = new MyHive(this, new Position(30, 0, 30), 5, 10);
+
+    this.bee = new MyBee(this, this.garden, this.hive);
+
+    // MyInterface Vars
     this.displayAxis = true;
     this.beeScale = 1;
     this.beeSpeed = 1;
+    this.cameraPerspective = 0;
 
     this.enableTextures(true);
 
@@ -71,6 +69,15 @@ export class MyScene extends CGFscene {
 
     this.panorama = new MyPanorama(this);
 
+    this.nature_sound = new Audio('audios/nature.mp3');
+    this.nature_sound.oncanplay = () => {
+      this.nature_sound.loop = true;
+      this.nature_sound.volume = 0.3;
+      this.nature_sound.play();
+    }
+
+
+    // Update every 50ms
     this.setUpdatePeriod(50);
   }
   initLights() {
@@ -106,22 +113,23 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    // this.garden.display();
-    this.bee.display();
     this.panorama.display();
-    // this.garden.display();
+    
+    this.rockSet.display();
+    
+    
+    this.rock.display();
+    
+    this.garden.display();
+    
+    this.hive.display();
+    this.grass.display();
+    
 
-    // this.pushMatrix();
+    this.plane.enableNormalViz();
+    this.plane.display();
 
-    // this.rockAppearance.apply();
-    //this.rockSet.display();
-    //this.rock.display();
-    //this.pollen.display();
-
-    // this.grass.display();
-    //this.hive.display();
-
-    // this.popMatrix();
+    this.bee.display();
 
     // ---- END Primitive drawing section
   }
@@ -129,7 +137,7 @@ export class MyScene extends CGFscene {
   update(t) {
     this.grass.update(t);
     this.panorama.update(t);
-    // this.bee.update(t);
+    this.bee.update(t);
   }
 
   updateBeeSpeed() {

@@ -13,6 +13,9 @@ export class MyInterface extends CGFinterface {
             "a": "KeyA",
             "d": "KeyD",
             "r": "KeyR",
+            "f": "KeyF",
+            "p": "KeyP",
+            "o": "KeyO",
         };
     }
 
@@ -27,8 +30,13 @@ export class MyInterface extends CGFinterface {
         this.initKeys();
 
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
-        this.gui.add(this.scene, 'beeSpeed', 0.1, 3).name('Speed').onChange(this.scene.updateBeeSpeed.bind(this.scene));
-        this.gui.add(this.scene, 'beeScale', 0.5, 3).name('Scale').onChange(this.scene.updateBeeScale.bind(this.scene));
+        this.gui.add(this.scene, 'beeSpeed', 0.1, 3).name('Bee Speed').onChange(this.scene.updateBeeSpeed.bind(this.scene));
+        this.gui.add(this.scene, 'beeScale', 0.5, 3).name('Bee Scale').onChange(this.scene.updateBeeScale.bind(this.scene));
+
+        this.gui.add(this.scene, 'cameraPerspective', {
+            'Third Person': 0,
+            'First Person': 1,
+        }).name('Camera Perspective');
 
         return true;
     }

@@ -1,9 +1,11 @@
 import {CGFappearance, CGFobject, CGFtexture} from '../../lib/CGF.js';
+import { MyPollen } from '../MyPollen.js';
 import {MySphere} from '../MySphere.js';
 
 import {MyLeaf} from './MyLeaf.js';
 import {MyPetal} from './MyPetal.js';
 import {MyStem} from './MyStem.js';
+import {Position} from '../Position.js';
 
 /**
  * MyFlower
@@ -12,9 +14,11 @@ import {MyStem} from './MyStem.js';
  */
 export class MyFlower extends CGFobject {
   constructor(
-      scene, nPetals, petalColour, heartRadius, heartColour, stemRadius,
+      scene, position, nPetals, petalColour, heartRadius, heartColour, stemRadius,
       stemSize, stemColour, leafColour) {
     super(scene);
+
+    this.position = position;
 
     this.nPetals = nPetals;
     this.petalColour = petalColour;
@@ -80,8 +84,19 @@ export class MyFlower extends CGFobject {
         rot: verticalRotation
       });
     }
+
+    const stamen_center = [
+      this.stem.topCenter[0],
+      this.stem.topCenter[1],
+      this.stem.topCenter[2],
+    ];
+    this.pollen = new MyPollen(scene, new Position(position.x + this.stem.topCenter[0], position.y+stemSize, position.z + this.stem.topCenter[2]), 0.2);
   }
   display() {
+
+    this.scene.pushMatrix();
+    this.scene.translate(this.position.x, this.position.y, this.position.z);
+
     // Display the stem
     this.scene.pushMatrix();
     this.stemApperance.apply();
@@ -137,7 +152,10 @@ export class MyFlower extends CGFobject {
     }
     // ...................
 
+    this.scene.popMatrix();
+    if(this.pollen) this.pollen.display();
+    this.scene.pushMatrix();
 
-    // this.scene.pushMatrix();
+    this.scene.popMatrix();
   }
 }
