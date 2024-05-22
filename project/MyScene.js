@@ -171,13 +171,13 @@ export class MyScene extends CGFscene {
     // first person camera
     if(this.cameraPerspective == 3){
       this.camera.position = vec3.fromValues(
-        this.bee.position.x - Math.sin(this.bee.orientation_xz)*2,
-        this.bee.position.y + 2,
-        this.bee.position.z - Math.cos(this.bee.orientation_xz)*2
+        this.bee.position.x - Math.sin(this.bee.orientation_xz)*0.5,
+        this.bee.position.y + 1,
+        this.bee.position.z - Math.cos(this.bee.orientation_xz)*0.5
       );
       this.camera.target = vec3.fromValues(
         this.bee.position.x + Math.sin(this.bee.orientation_xz),
-        this.bee.position.y + 2,
+        this.bee.position.y + 1,
         this.bee.position.z + Math.cos(this.bee.orientation_xz)
       );
     }
