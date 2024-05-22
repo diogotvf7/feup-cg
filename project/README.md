@@ -29,6 +29,10 @@
 
 ## 5. Pollen and Hive
 
+| Pollen | Hive |
+| -------------- | ------------ |
+| <img src="screenshots/project-t09g01-9.png" /> |  <img src="screenshots/project-t09g01-10.png" /> |
+
 ## 6. Grass
 
 ## 7. Clouds

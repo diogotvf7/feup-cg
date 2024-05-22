@@ -50,7 +50,7 @@ export class MyScene extends CGFscene {
       new MyRockSet(this, this.rockTexture, 4, new Position(25, 0, -30))
     ];
     this.rocks = []
-    this.hive = new MyHive(this, new Position(30, 0, -30), 5, 10);
+    this.hive = new MyHive(this, new Position(0, 0, 0), 5, 10);
 
     // Generate random Rocks
     for (let i = 0; i < 10; i++) {
@@ -94,6 +94,8 @@ export class MyScene extends CGFscene {
     //this.loadingPhase = true;
     this.loadingPhase = false;
     this.cameraCounter = 0;
+
+    this.pollen = new MyPollen(this, new Position(10, 10, 10), 1);
 
     document.addEventListener('keydown', (event) => {
       if (event.code === 'Space') {
@@ -150,13 +152,15 @@ export class MyScene extends CGFscene {
     this.panorama.display();
     //this.garden.display();
 
-    //this.hive.display();
+    this.hive.display();
     
     //this.grass.display();
 
-    this.plane.display();
+    //this.plane.display();
 
-    this.bee.display();
+    this.pollen.display();
+
+    //this.bee.display();
 
     // ---- END Primitive drawing section
   }
