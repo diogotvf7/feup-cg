@@ -33,7 +33,7 @@ export class MyBee extends CGFobject {
 
     this.flightHeight = 13;
 
-    this.position = new Position(0, this.flightHeight, 0);
+    this.position = new Position(5, this.flightHeight, 5);
     this.orientation_xz = Math.PI / 2;
 
     this.time = 0;
@@ -103,7 +103,7 @@ export class MyBee extends CGFobject {
       }
 
       if (pressedKeys.includes("r")) {
-        this.position = new Position(0, this.flightHeight, 0);
+        this.position = new Position(5, this.flightHeight, 5);
         this.orientation_xz = Math.PI / 2;
         this.speed = 0;
         this.target = null;

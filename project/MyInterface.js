@@ -34,9 +34,11 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'beeScale', 0.5, 3).name('Bee Scale').onChange(this.scene.updateBeeScale.bind(this.scene));
 
         this.gui.add(this.scene, 'cameraPerspective', {
-            'Third Person': 0,
-            'First Person': 1,
-        }).name('Camera Perspective');
+            'Free': 0,
+            'Fixed': 1,
+            'Third Person': 2,
+            'First Person': 3,
+        }).name('Camera Perspective').onChange(this.scene.updateCameraPerspective.bind(this.scene));
 
         return true;
     }

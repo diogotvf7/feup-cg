@@ -1,27 +1,34 @@
-import {CGFobject} from '../lib/CGF.js';
+import {CGFobject, CGFtexture, CGFappearance} from '../lib/CGF.js';
 /**
 * MyPlane
 * @constructor
  * @param scene - Reference to MyScene object
  * @param nDivs - number of divisions in both directions of the surface
- * @param minS - minimum texture coordinate in S
- * @param maxS - maximum texture coordinate in S
- * @param minT - minimum texture coordinate in T
- * @param maxT - maximum texture coordinate in T
 */
 export class MyPlane extends CGFobject {
-	constructor(scene, nrDivs, minS, maxS, minT, maxT) {
+	constructor(scene, nrDivs) {
 		super(scene);
 		// nrDivs = 1 if not provided
 		nrDivs = typeof nrDivs !== 'undefined' ? nrDivs : 1;
 		this.nrDivs = nrDivs;
-		this.patchLength = 1.0 / nrDivs;
-		this.minS = minS || 0;
-		this.maxS = maxS || 1;
-		this.minT = minT || 0;
-		this.maxT = maxT || 1;
+		this.size = 400;
+		this.patchLength = this.size / nrDivs;
+		this.minS = 0;
+		this.maxS = 50;
+		this.minT = 0;
+		this.maxT = 50;
 		this.q = (this.maxS - this.minS) / this.nrDivs;
 		this.w = (this.maxT - this.minT) / this.nrDivs;
+
+		this.texture = new CGFtexture(this.scene, 'images/plane.png');
+		this.appearance = new CGFappearance(this.scene);
+		this.appearance.setTexture(this.texture);
+		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+		this.appearance.setAmbient(0.9, 0.9, 0.9, 1);
+		this.appearance.setDiffuse(0.9, 0.9, 0.9, 1);
+		this.appearance.setSpecular(0.1, 0.1, 0.1, 1);
+		this.appearance.setShininess(10.0);
+
 		this.initBuffers();
 	}
 	initBuffers() {
@@ -67,6 +74,15 @@ export class MyPlane extends CGFobject {
 	{ 
 		this.primitiveType=this.scene.gl.LINES;
 	};
+
+	display(){
+		this.scene.pushMatrix();
+		this.appearance.apply();
+		this.scene.rotate(-Math.PI/2, 1, 0, 0);
+		this.scene.translate(-this.size/2, this.size/2, 0);
+		super.display();
+		this.scene.popMatrix();
+	}
 
 }
 
