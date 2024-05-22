@@ -148,12 +148,14 @@ export class MyScene extends CGFscene {
 
     this.panorama.display();
 
-    this.rockSets.forEach(rockSet => rockSet.display());
-    this.rocks.forEach(rock => rock.display());
+    // this.rockSet.display();
+
+    // this.rock.display();
 
     this.garden.display();
 
     this.hive.display();
+    
     this.grass.display();
 
     this.plane.display();

@@ -25,6 +25,8 @@ export class MyTorax extends CGFobject {
         [1.5, 0],
         [0, 0],
       ],
+      10,
+      10
     );
     this.leg = new MyBezierCylinder(
       scene,
@@ -48,7 +50,8 @@ export class MyTorax extends CGFobject {
         [0.2,  .8],
         [0,  9]
       ],
-      5
+      5,
+      10
     )
 
     this.beeTexture = new CGFtexture(scene, 'images/textures/bee/torax.png');

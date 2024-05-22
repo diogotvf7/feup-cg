@@ -1,4 +1,5 @@
 import { CGFappearance, CGFtexture } from '../lib/CGF.js';
+import { MyCeiling } from './MyCeiling.js';
 import { Object } from './Object.js';
 import { Position } from './Position.js';
 
@@ -20,10 +21,8 @@ class HoneyKepper extends Object {
 
     this.initBuffers();
   }
-
   
   initBuffers() {
-    
     this.vertices = [];
     this.indices = [];
     this.normals = [];
@@ -105,7 +104,7 @@ class HoneyKepper extends Object {
     this.initGLBuffers();
   }
 
-  display(){
+  display() {
     this.scene.pushMatrix();
     this.appearance.apply();
     super.display();
@@ -131,10 +130,14 @@ export class MyHive extends Object {
     this.appearance.setAmbient(1, 1, 0, 1);
     this.appearance.setDiffuse(1, 1, 0, 1);
     this.appearance.setSpecular(0, 0, 0, 1);
-    
-    this.texture = new CGFtexture(scene, 'images/textures/wood_hive.jpg');
-    this.appearance.setTexture(this.texture);
 
+    this.ceiling_appearance = new CGFappearance(scene);
+    this.ceiling_texture = new CGFtexture(scene, 'images/textures/wood_hive.jpg');
+    this.ceiling_appearance.setTexture(this.ceiling_texture);
+    this.ceiling_appearance.setAmbient(1, 1, 1, 1);
+    this.ceiling_appearance.setDiffuse(1, 1, 1, 1);
+    this.ceiling_appearance.setSpecular(1, 1, 1, 1);
+    
     this.sound = new Audio('audios/hive.mp3');
     this.sound.oncanplay = () => {
       this.sound.loop = true;
@@ -147,25 +150,34 @@ export class MyHive extends Object {
     this.honeyKeppers.push(new HoneyKepper(scene, pos, base, height/3, 0));
     this.honeyKeppers.push(new HoneyKepper(scene, new Position(pos.x, pos.y+height/3, pos.z), base, height/3, 0));
     this.honeyKeppers.push(new HoneyKepper(scene, new Position(pos.x, pos.y + (height/3)*2, pos.z), base, height/3, 0));
+
+    this.celling = new MyCeiling(scene, base, 0.3);
   }
 
-  display(){
+  display() {
     this.honeyKeppers.forEach(honeyKepper => {
       honeyKepper.display();
     });
+
+    this.scene.pushMatrix();
+    this.scene.translate(0, this.height, 0);
+    this.scene.scale(1, .7, 1);
+    this.ceiling_appearance.apply();
+    this.celling.display();
+    this.scene.popMatrix();
   }
 
-  dropPollen(pollen){
+  dropPollen(pollen) {
     this.pollens.push(pollen);
     this.dropPollenSound.play();
   }
 
-  checkVolume(beePosition){
+  checkVolume(beePosition) {
     let x = this.position.x - beePosition.x;
     let z = this.position.z - beePosition.z;
     let distance = Math.sqrt(x*x + z*z);
 
-    if(distance < 13){
+    if(distance < 13) {
       this.sound.volume = 1 - distance/13;
     }else{
       this.sound.volume = 0;
