@@ -43,8 +43,8 @@ export class MyScene extends CGFscene {
     this.sphere = new MySphere(this, 20, 20, 1, -1);
 
     this.pollen = new MyPollen(this, new Position(0, 0, 0), 1);
-    this.garden = new MyGarden(this, new Position(-40, 0, -40), 20, 20, .7);
-    this.grass = new MyGrassSquare(this, new Position(0, 0, 0), 150, 150);
+    this.garden = new MyGarden(this, new Position(-40, 0, -40), 20, 20, .3);
+    this.grass = new MyGrassSquare(this, new Position(0, 0, 0), 60, 60);
     this.hive = new MyHive(this, new Position(0, 0, 0), 5, 10);
     
     this.rockSets = [];
@@ -149,6 +149,8 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
+    this.grass.display();
+
     this.panorama.display();
 
     this.rockSets.forEach(rockSet => rockSet.display());
@@ -158,8 +160,6 @@ export class MyScene extends CGFscene {
     this.hive.display();
     
     this.garden.display();
-
-    this.grass.display();
 
     this.plane.display();
 
