@@ -4,7 +4,7 @@ import { MyTorax } from './MyTorax.js';
 import { MyHead } from './MyHead.js';
 import { Object } from '../Object.js';
 import { Position } from '../Position.js';
-import { MyLegs } from './MyLegs.js';
+import { MyStinger } from './MyStinger.js';
 
 /**
  * MyBee
@@ -15,10 +15,10 @@ export class MyBee extends CGFobject {
   constructor(scene) {
     super(scene);
 
-    this.abdomen = new MyAbdomen(scene);
-    this.torax = new MyTorax(scene);
     this.head = new MyHead(scene);
-    this.legs = new MyLegs(scene);
+    this.torax = new MyTorax(scene);
+    this.abdomen = new MyAbdomen(scene);
+    this.stinger = new MyStinger(scene);
 
     this.scale = 2;
     this.speed = 0;
@@ -38,12 +38,28 @@ export class MyBee extends CGFobject {
     // this.scene.rotate(this.orientation_xz, 0, 1, 0); // Rotate the bee based on orientation
     // this.scene.scale(this.scale, this.scale, this.scale);
 
-    // Body displayments
+    // Body displayments    
+    this.scene.pushMatrix();
+    this.scene.translate(0, 0.5, 0.3);
+    this.scene.scale(1.75, 1.75, 1.75);
+    this.scene.rotate(3 * Math.PI / 4, 1, 0, 0);
     this.head.display();    
-    // this.abdomen.display();
-    // this.torax.display();
-    // this.antennae.display();
-    // this.legs.display();
+    this.scene.popMatrix();
+
+    this.torax.display();
+
+    this.scene.pushMatrix();
+    this.scene.translate(0, 0, -.3);
+    this.scene.rotate(-6 * Math.PI / 10, 1, 0, 0);
+    this.scene.scale(.8, 2.3, .9);
+    this.abdomen.display();
+    this.scene.popMatrix();
+
+    this.scene.pushMatrix();
+    this.scene.translate(0, -.7, -2.42);
+    this.scene.rotate(-6 * Math.PI / 10, 1, 0, 0);    
+    this.stinger.display();
+    this.scene.popMatrix();
   }
   turn(angle){
     this.orientation_xz += angle;

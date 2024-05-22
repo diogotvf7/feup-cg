@@ -1,5 +1,5 @@
 import {CGFappearance, CGFobject, CGFtexture} from '../../lib/CGF.js';
-import { MyBeeBody } from './MyBeeBody.js';
+import { MyBezierCylinder } from '../MyBezierCylinder.js';
 
 /**
  * MyAbdomen
@@ -9,10 +9,25 @@ import { MyBeeBody } from './MyBeeBody.js';
 export class MyAbdomen extends CGFobject {
   constructor(scene) {
     super(scene);    
-    this.torax = new MyBeeBody(scene, 16, 32, 1);
+    this.abdomen = new MyBezierCylinder(
+      scene,
+      1,
+      [ 
+        [0, 0],
+        [0, 0],
+        [0, 1],
+        [0, 1] 
+      ],
+      [
+        [0, 0],
+        [1.5, 0],
+        [.2, 1],
+        [.8, 1],
+        [0, 1],
+      ],
+    );
 
-
-    this.beeTexture = new CGFtexture(scene, 'images/textures/bee/fur2.png');
+    this.beeTexture = new CGFtexture(scene, 'images/textures/bee/fur2-test.png');
     this.beeAppearance = new CGFappearance(scene);
     this.beeAppearance.setTexture(this.beeTexture);
     this.beeAppearance.setTextureWrap('REPEAT', 'REPEAT');
@@ -23,9 +38,8 @@ export class MyAbdomen extends CGFobject {
   }
   display() {
     this.scene.pushMatrix();
-    this.scene.rotate(Math.PI / 3, 1, 0, 0);
     this.beeAppearance.apply();
-    this.torax.display();
+    this.abdomen.display();
     this.scene.popMatrix();
   }
 }

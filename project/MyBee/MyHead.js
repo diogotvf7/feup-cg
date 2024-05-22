@@ -11,7 +11,6 @@ import { rgbToQuofficient } from '../utils.js';
 export class MyHead extends CGFobject {
   constructor(scene) {
     super(scene);
-    console.log("CABEÇORRA");
     this.head = new MyBezierCylinder(
       scene,
       .5,
@@ -29,7 +28,6 @@ export class MyHead extends CGFobject {
         [0, 1],
       ],
     );
-    console.log("CABEÇORRA");
     this.eye = new MySphere(scene, 16, 16, .2, 1, .7, 1.5, 2);
     this.left_antennae = new MyBezierCylinder(
       scene,
@@ -103,13 +101,13 @@ export class MyHead extends CGFobject {
     );
 
     // head
-    this.headTexture = new CGFtexture(scene, 'images/textures/bee/fur.png');
+    this.headTexture = new CGFtexture(scene, 'images/textures/bee/fur-test.png');
     this.headAppearance = new CGFappearance(scene);
     this.headAppearance.setTexture(this.headTexture);
     this.headAppearance.setTextureWrap('REPEAT', 'REPEAT');
-    this.headAppearance.setAmbient(.9, .9, .1, 1);
-    this.headAppearance.setDiffuse(.9, .9, .1, 1);
-    this.headAppearance.setSpecular(.9, .9, .1, 1);
+    this.headAppearance.setAmbient(.9, 1, .1, 1);
+    this.headAppearance.setDiffuse(.9, 1, .1, 1);
+    this.headAppearance.setSpecular(.9, 1, .1, 1);
 
     // eye
     this.eyeTexture = new CGFtexture(scene, 'images/textures/bee/eye.png');
@@ -117,13 +115,13 @@ export class MyHead extends CGFobject {
     this.eyeAppearance.setTexture(this.eyeTexture);
     this.eyeAppearance.setAmbient(0, 0, 0, 1);
     this.eyeAppearance.setDiffuse(.1, .1, .1, 1);
-    this.eyeAppearance.setSpecular(.1, .1, .1, 1);
+    this.eyeAppearance.setSpecular(1, 1, 1, 1);
 
     // antennae
     this.antennaeAppearance = new CGFappearance(scene);
-    this.eyeAppearance.setAmbient(0, 0, 0, 1);
-    this.eyeAppearance.setDiffuse(.3, .3, .3, 1);
-    this.eyeAppearance.setSpecular(1, 1, 1, 1);
+    this.antennaeAppearance.setAmbient(0, 0, 0, 1);
+    this.antennaeAppearance.setDiffuse(0, 0, 0, 1);
+    this.antennaeAppearance.setSpecular(0, 0, 0, 1);
 
   }
   display() {
