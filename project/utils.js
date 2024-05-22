@@ -79,16 +79,29 @@ const generateArrayWithSum =
     
       // Normalize the normal vector
       const length = Math.sqrt(normal[0] ** 2 + normal[1] ** 2);
-      const normalizedNormal = [normal[0] / length, normal[1] / length];
-    
+      const normalizedNormal = length 
+        ? [normal[0] / length, normal[1] / length] 
+        : [0, 1]; // If the normal vector is the zero vector, default to [0, 1]
+
       return {
         point: points[0],
+        tangentA,
+        tangentB,
         normal: normalizedNormal
       };
     };
 
     const rad_to_deg = (radians) => radians * (180 / Math.PI);
     
+    const rgbToQuofficient = (rgb) => {
+      return rgb.map(val => val / 255);
+    }
+
+    const dist = (p1, p2) => Math.sqrt(
+      p1.reduce((sum, value, index) => sum + (value - p2[index]) ** 2, 0)
+    );
+    
+
 export {
   arraySum, 
   arraySub, 
@@ -98,4 +111,6 @@ export {
   getDir, 
   deCasteljau,
   rad_to_deg,
+  rgbToQuofficient,
+  dist,
 }

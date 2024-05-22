@@ -1,5 +1,4 @@
 import { CGFappearance, CGFaxis, CGFcamera, CGFscene, CGFtexture } from '../lib/CGF.js';
-
 import { MyGarden } from './MyGarden/MyGarden.js';
 import { MyPanorama } from './MyPanorama/MyPanorama.js';
 import { MyPlane } from './MyPlane.js';
@@ -33,6 +32,8 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
+    this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+    this.gl.enable(this.gl.BLEND);
 
     // Initialize scene objects
     this.axis = new CGFaxis(this);
@@ -123,9 +124,9 @@ export class MyScene extends CGFscene {
     this.hive.display();
     this.grass.display();
 
-    this.bee.display();
-
     this.plane.display();
+
+    this.bee.display();
 
     // ---- END Primitive drawing section
   }
