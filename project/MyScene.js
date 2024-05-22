@@ -95,8 +95,6 @@ export class MyScene extends CGFscene {
     this.loadingPhase = false;
     this.cameraCounter = 0;
 
-    this.pollen = new MyPollen(this, new Position(10, 10, 10), 1);
-
     document.addEventListener('keydown', (event) => {
       if (event.code === 'Space') {
         this.loadingPhase = false;
@@ -152,13 +150,13 @@ export class MyScene extends CGFscene {
     this.panorama.display();
     //this.garden.display();
 
-    this.hive.display();
+    //this.hive.display();
     
-    //this.grass.display();
+    this.grass.display();
 
-    //this.plane.display();
+    this.plane.display();
 
-    this.pollen.display();
+    //this.pollen.display();
 
     //this.bee.display();
 

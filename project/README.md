@@ -35,4 +35,8 @@
 
 ## 6. Grass
 
+| Grass Blade | Grass |
+| -------------- | ------------ |
+| <img src="screenshots/project-t09g01-12.png" /> |  <img src="screenshots/project-t09g01-11.png" /> |
+
 ## 7. Clouds
