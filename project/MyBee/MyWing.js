@@ -1,5 +1,6 @@
 import {CGFappearance, CGFobject, CGFtexture} from '../../lib/CGF.js';
 import { MyBezierCylinder } from '../MyBezierCylinder.js';
+import { deCasteljau, dist } from '../utils.js';
 
 /**
  * MyWing
@@ -9,45 +10,48 @@ import { MyBezierCylinder } from '../MyBezierCylinder.js';
 export class MyWing extends CGFobject {
   constructor(scene) {
     super(scene);    
-    this.wing = new MyBezierCylinder(
-      scene,
-      .1,
-      [ 
-        [0,4],                  // curva para as asas
-        [0,5],
-        [13,10],
-        [11.5,8],
-        [10,6],
-        [9,5.5],
-        [7.5,5.5],
-        [9,5.5],
-        [10,5.5],
-        [8,3],
-        [6,2],
-        [0,2],
-        [0,3],
-        [0,4],
-      ],
-      [
-        [1, 0],
-        [0, 0],
-        [0, .1],
-      ],
-    );
+    this.bezier = [
+      [0,     0],
+      [0,     .09],
+      [1,     .47],
+      [.885,  .32],
+      [.67,   0],
+      [.45,   0],
+      [.45,   -.146],
+      [0,     -.146],
+      [0,     -.069],
+      [0,     0],
+    ];
+    this.steps = 100;
 
-    this.wingAppearance = new CGFappearance(scene);
-    this.wingAppearance.setAmbient(0, 0, 0, 1);
-    this.wingAppearance.setDiffuse(.3, .3, .3, 1);
-    this.wingAppearance.setSpecular(1, 1, 1, 1);
-
+    this.initBuffers();
   }
-  display() {
-    this.scene.pushMatrix();
-    // this.scene.translate(0, 0, -.3);
-    // this.scene.rotate(-6 * Math.PI / 10, 1, 0, 0);
-    // this.scene.scale(.8, 2.3, .9);
-    this.wingAppearance.apply();
-    this.wing.display();
-    this.scene.popMatrix();
+  initBuffers() {
+    this.vertices = [
+      0.4, 0, 0.1,
+    ];
+    this.normals = [];
+    this.indices = [];
+    this.texCoords = [
+      0.4, 0.1,
+    ];
+
+    for (let i = 0; i <= this.steps; i++) {
+      const bezier = deCasteljau(this.bezier, i / (this.steps - 1));
+
+      const point = [bezier.point[0], 0, bezier.point[1]];
+
+      this.vertices.push(...point);
+      this.vertices.push(...point);
+      this.normals.push(0, 1, 0);
+      this.normals.push(0, -1, 0);
+      this.texCoords.push(point[0], point[2]);
+      this.texCoords.push(point[0], point[2]);
+      this.indices.push(0, i * 2, (i * 2 + 2) % (this.steps * 2 + 2));
+      this.indices.push(0, (i * 2 + 2) % (this.steps * 2 + 2), i * 2);
+    }
+
+    this.primitiveType = this.scene.gl.TRIANGLES;
+    this.initGLBuffers();
   }
 }

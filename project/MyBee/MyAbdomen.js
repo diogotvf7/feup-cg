@@ -27,7 +27,7 @@ export class MyAbdomen extends CGFobject {
       ],
     );
 
-    this.beeTexture = new CGFtexture(scene, 'images/textures/bee/fur2-test.png');
+    this.beeTexture = new CGFtexture(scene, 'images/textures/bee/abdomen-fur.png');
     this.beeAppearance = new CGFappearance(scene);
     this.beeAppearance.setTexture(this.beeTexture);
     this.beeAppearance.setTextureWrap('REPEAT', 'REPEAT');

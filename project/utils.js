@@ -97,6 +97,11 @@ const generateArrayWithSum =
       return rgb.map(val => val / 255);
     }
 
+    const dist = (p1, p2) => Math.sqrt(
+      p1.reduce((sum, value, index) => sum + (value - p2[index]) ** 2, 0)
+    );
+    
+
 export {
   arraySum, 
   arraySub, 
@@ -107,4 +112,5 @@ export {
   deCasteljau,
   rad_to_deg,
   rgbToQuofficient,
+  dist,
 }

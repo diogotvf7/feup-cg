@@ -1,7 +1,6 @@
 import {CGFappearance, CGFobject, CGFtexture} from '../../lib/CGF.js';
 import { MyBezierCylinder } from '../MyBezierCylinder.js';
 import {MySphere} from '../MySphere.js';
-import { rgbToQuofficient } from '../utils.js';
 
 /**
  * MyHead
@@ -95,13 +94,10 @@ export class MyHead extends CGFobject {
       ],
       10,
       20,
-      // [
-
-      // ]
     );
 
     // head
-    this.headTexture = new CGFtexture(scene, 'images/textures/bee/fur-test.png');
+    this.headTexture = new CGFtexture(scene, 'images/textures/bee/head-fur.png');
     this.headAppearance = new CGFappearance(scene);
     this.headAppearance.setTexture(this.headTexture);
     this.headAppearance.setTextureWrap('REPEAT', 'REPEAT');

@@ -37,6 +37,8 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
+    this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+    this.gl.enable(this.gl.BLEND);
 
     // Initialize scene objects
     this.axis = new CGFaxis(this);
@@ -107,7 +109,6 @@ export class MyScene extends CGFscene {
     // ---- BEGIN Primitive drawing section
 
     // this.garden.display();
-    this.bee.display();
     this.panorama.display();
     // this.garden.display();
 
@@ -122,6 +123,7 @@ export class MyScene extends CGFscene {
     //this.hive.display();
 
     // this.popMatrix();
+    this.bee.display();
 
     // ---- END Primitive drawing section
   }
@@ -129,7 +131,7 @@ export class MyScene extends CGFscene {
   update(t) {
     this.grass.update(t);
     this.panorama.update(t);
-    // this.bee.update(t);
+    this.bee.update(t);
   }
 
   updateBeeSpeed() {

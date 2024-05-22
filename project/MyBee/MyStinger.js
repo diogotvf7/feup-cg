@@ -27,8 +27,9 @@ export class MyStinger extends CGFobject {
 
     this.stingerAppearance = new CGFappearance(scene);
     this.stingerAppearance.setAmbient(0, 0, 0, 1);
-    this.stingerAppearance.setDiffuse(.3, .3, .3, 1);
+    this.stingerAppearance.setDiffuse(1, 1, 1, 1);
     this.stingerAppearance.setSpecular(1, 1, 1, 1);
+    this.stingerAppearance.setShininess(10);
 
   }
   display() {
