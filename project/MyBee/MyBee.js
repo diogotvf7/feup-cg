@@ -141,10 +141,7 @@ export class MyBee extends CGFobject {
     this.scene.popMatrix();
 
     if (this.pollen) {
-      this.scene.pushMatrix();
-      this.scene.translate(0, 0, 0.5);
       this.pollen.display();
-      this.scene.popMatrix();
     }
   }
   turn(angle){
@@ -226,6 +223,10 @@ export class MyBee extends CGFobject {
     } else {
       this.position.x += this.speed * Math.sin(this.orientation_xz);
       this.position.z += this.speed * Math.cos(this.orientation_xz);
+    }
+
+    if(this.pollen){
+      this.pollen.position = new Position(0, -2, 0);
     }
 
     this.hive.checkVolume(this.position)

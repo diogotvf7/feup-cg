@@ -58,8 +58,11 @@ export class MyGarden extends CGFobject {
     }
   }
   display() {
+    this.scene.pushMatrix();
+    //this.scene.translate(-this.width, 0, -this.height);
     this.flowers.forEach((flower) => {
       flower.display();
     });
+    this.scene.popMatrix();
   }
 }

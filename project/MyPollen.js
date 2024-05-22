@@ -3,7 +3,7 @@ import { CGFappearance } from '../lib/CGF.js';
 
 export class MyPollen extends MySphere {
   constructor(scene, position, radius = 1) {
-    super(scene, 20, 20, radius, 1, 1, 1, 1, radius * 2);
+    super(scene, 20, 20, radius, 1, 1, 1, 1, 2);
     this.scene = scene;
     this.position = position;
 
@@ -17,6 +17,7 @@ export class MyPollen extends MySphere {
     this.scene.pushMatrix();
     this.appearance.apply();
     this.scene.translate(this.position.x, this.position.y + this.radius, this.position.z);
+    this.scene.rotate(Math.PI/2, 1, 0, 0);
     super.display();
     this.scene.popMatrix();
   }
