@@ -152,9 +152,9 @@ export class MyScene extends CGFscene {
 
     //this.hive.display();
     
-    this.grass.display();
+    //this.grass.display();
 
-    this.plane.display();
+    //this.plane.display();
 
     //this.pollen.display();
 
