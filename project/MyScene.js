@@ -147,20 +147,15 @@ export class MyScene extends CGFscene {
     // ---- BEGIN Primitive drawing section
 
     this.panorama.display();
-
-    // this.rockSet.display();
-
-    // this.rock.display();
-
     this.garden.display();
 
-    this.hive.display();
+    //this.hive.display();
     
-    this.grass.display();
+    //this.grass.display();
 
     this.plane.display();
 
-    this.bee.display();
+    //this.bee.display();
 
     // ---- END Primitive drawing section
   }
