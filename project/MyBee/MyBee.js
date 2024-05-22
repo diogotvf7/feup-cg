@@ -36,6 +36,7 @@ export class MyBee extends CGFobject {
     this.flightHeight = 13;
 
     this.position = new Position(5, this.flightHeight, 5);
+    this.position = new Position(30, this.flightHeight, 30);
     this.orientation_xz = Math.PI / 2;
 
     this.time = 0;

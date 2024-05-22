@@ -91,7 +91,8 @@ export class MyScene extends CGFscene {
     }
 
     this.loadingCameraIndex = 0;
-    this.loadingPhase = true;
+    //this.loadingPhase = true;
+    this.loadingPhase = false;
     this.cameraCounter = 0;
 
     document.addEventListener('keydown', (event) => {
@@ -147,7 +148,7 @@ export class MyScene extends CGFscene {
     // ---- BEGIN Primitive drawing section
 
     this.panorama.display();
-    this.garden.display();
+    //this.garden.display();
 
     //this.hive.display();
     
@@ -155,7 +156,7 @@ export class MyScene extends CGFscene {
 
     this.plane.display();
 
-    //this.bee.display();
+    this.bee.display();
 
     // ---- END Primitive drawing section
   }

@@ -10,9 +10,9 @@
 
 ## 2. Flowers
 
-| Pedra | Pirâmide de Pedras |
+| Flower | Garden |
 | -------------- | ------------ |
-| <img src="screenshots/project-t09g01-5.png" /> |  <img src="screenshots/project-t09g01-6.png" /> |
+| <img src="screenshots/project-t09g01-6.png" /> |  <img src="screenshots/project-t09g01-5.png" /> |
 
 
 ## 3. Pedras e penedos
@@ -22,6 +22,10 @@
 | <img src="screenshots/project-t09g01-3.png" /> |  <img src="screenshots/project-t09g01-4.png" /> |
 
 ## 4. Bee
+
+| Bee | Bee |
+| -------------- | ------------ |
+| <img src="screenshots/project-t09g01-7.png" /> |  <img src="screenshots/project-t09g01-8.png" /> |
 
 ## 5. Pollen and Hive
 
