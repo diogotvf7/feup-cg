@@ -41,7 +41,7 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 20, 20, 1, -1);
-    
+
     this.pollen = new MyPollen(this, new Position(0, 0, 0), 1);
     this.garden = new MyGarden(this, new Position(-40, 0, -40), 20, 20, .7);
     this.grass = new MyGrassSquare(this, new Position(0, 0, 0), 150, 150);
@@ -67,7 +67,7 @@ export class MyScene extends CGFscene {
     this.bee = new MyBee(this, this.garden, this.hive);
 
     // MyInterface Vars
-    this.displayAxis = true;
+    this.displayAxis = false;
     this.beeScale = 1;
     this.beeSpeed = 1;
     this.cameraPerspective = 0;
@@ -93,6 +93,18 @@ export class MyScene extends CGFscene {
       this.nature_sound.play();
     }
 
+    this.loadingCameraIndex = 0;
+    this.loadingPhase = true;
+    // this.loadingPhase = false;
+    this.cameraCounter = 0;
+
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Space') {
+        this.loadingPhase = false;
+        this.camera_perpective = 1;
+      }
+    });
+
     // Update every 50ms
     this.setUpdatePeriod(50);
   }
@@ -103,10 +115,16 @@ export class MyScene extends CGFscene {
     this.lights[0].update();
   }
   initCameras() {
-    this.camera = new CGFcamera(
-      1.5, 0.1, 1000, vec3.fromValues(5, 5, 5), vec3.fromValues(0, 0, 0));
-    // this.camera = new CGFcamera(
-    //   1.5, 0.1, 1000, vec3.fromValues(0, 20, 0), vec3.fromValues(10, 15, 10));
+    this.loadingCameras = [
+      new CGFcamera(1.5, 0.1, 1000, vec3.fromValues(10, 20, 10), vec3.fromValues(20, 5, 20)),
+      new CGFcamera(1.5, 0.1, 1000, vec3.fromValues(35, 5, -20), vec3.fromValues(30, 8, -30)),
+      new CGFcamera(1.5, 0.1, 1000, vec3.fromValues(50, 5, 50), vec3.fromValues(0, 20, 0)),
+      new CGFcamera(1.5, 0.1, 1000, vec3.fromValues(15, 10, 15), vec3.fromValues(20, 10, 20)),
+      new CGFcamera(1.5, 0.1, 1000, vec3.fromValues(8,10,-3), vec3.fromValues(5,13,5)),
+      new CGFcamera(1.5, 0.1, 1000, vec3.fromValues(2, 2, 2), vec3.fromValues(15, 15, 15)),
+    ]
+
+    this.camera = this.loadingCameras[0];
   }
   setDefaultAppearance() {
     this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -145,6 +163,8 @@ export class MyScene extends CGFscene {
 
     this.plane.display();
 
+    this.pollen.display();
+
     this.bee.display();
 
     // ---- END Primitive drawing section
@@ -155,32 +175,39 @@ export class MyScene extends CGFscene {
     this.panorama.update(t);
     this.bee.update(t);
 
-    // Camera Fixed on bee
-    if(this.cameraPerspective == 1) {
-      this.camera.target = vec3.fromValues(this.bee.position.x, this.bee.flightHeight+5, this.bee.position.z);
+    if (this.loadingPhase) {
+      this.cameraCounter++;
+      if (this.cameraCounter % 50 == 0) {
+        this.cameraCounter = 0;
+        this.loadingCameraIndex = (this.loadingCameraIndex + 1) % this.loadingCameras.length;
+        this.camera.position = this.loadingCameras[this.loadingCameraIndex].position;
+        this.camera.target = this.loadingCameras[this.loadingCameraIndex].target;
+      }
     }
-    // third person camera
-    if(this.cameraPerspective == 2){
+
+    // Bee Fixed Camera
+    if (this.cameraPerspective == 1) {
+      this.camera.target = vec3.fromValues(this.bee.position.x, this.bee.flightHeight + 5, this.bee.position.z);
+    }
+    // 3rd Person camera
+    if (this.cameraPerspective == 2) {
       this.camera.position = vec3.fromValues(
-        this.bee.position.x - Math.sin(this.bee.orientation_xz)*5,
-        //this.bee.flightHeight+5,
+        this.bee.position.x - Math.sin(this.bee.orientation_xz) * 5,
         this.bee.position.y + 5,
-        this.bee.position.z - Math.cos(this.bee.orientation_xz)*5
-      );      
-      //update target based on bee orientation_xz
+        this.bee.position.z - Math.cos(this.bee.orientation_xz) * 5
+      );
       this.camera.target = vec3.fromValues(
-        this.bee.position.x + Math.sin(this.bee.orientation_xz)*5,
-        //this.bee.flightHeight+2,
+        this.bee.position.x + Math.sin(this.bee.orientation_xz) * 5,
         this.bee.position.y + 3,
-        this.bee.position.z + Math.cos(this.bee.orientation_xz)*5
+        this.bee.position.z + Math.cos(this.bee.orientation_xz) * 5
       );
     }
-    // first person camera
-    if(this.cameraPerspective == 3){
+    // 1st Person camera
+    if (this.cameraPerspective == 3) {
       this.camera.position = vec3.fromValues(
-        this.bee.position.x - Math.sin(this.bee.orientation_xz)*0.5,
+        this.bee.position.x - Math.sin(this.bee.orientation_xz) * 0.5,
         this.bee.position.y + 1,
-        this.bee.position.z - Math.cos(this.bee.orientation_xz)*0.5
+        this.bee.position.z - Math.cos(this.bee.orientation_xz) * 0.5
       );
       this.camera.target = vec3.fromValues(
         this.bee.position.x + Math.sin(this.bee.orientation_xz),
@@ -199,10 +226,10 @@ export class MyScene extends CGFscene {
   }
 
   updateCameraPerspective() {
-    if(this.cameraPerspective == 0){
+    if (this.cameraPerspective == 0) {
     }
-    if(this.cameraPerspective == 1){
-      this.camera.target = vec3.fromValues(this.bee.position.x, this.bee.flightHeight+5, this.bee.position.z);
+    if (this.cameraPerspective == 1) {
+      this.camera.target = vec3.fromValues(this.bee.position.x, this.bee.flightHeight + 5, this.bee.position.z);
     }
   }
 }
