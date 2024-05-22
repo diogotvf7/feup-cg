@@ -13,7 +13,7 @@ import { Object } from './Object.js';
  * @param scaleZ - Scale factor on the z-axis
  */
 export class MyRock extends Object {
-  constructor(scene, position, slices, stacks, radius = 1, scaleX = 1, scaleY = 1, scaleZ = 1) {
+  constructor(scene, texture, position, slices, stacks, radius = 1, scaleX = 1, scaleY = 1, scaleZ = 1) {
     super(scene, position);
 
     this.scene = scene;
@@ -27,9 +27,8 @@ export class MyRock extends Object {
     this.scaleY = scaleY;
     this.scaleZ = scaleZ;
 
-    this.texture = new CGFtexture(scene, 'images/textures/lichen/lichen_diff.jpg');
     this.appearance = new CGFappearance(scene);
-    this.appearance.setTexture(this.texture);
+    this.appearance.setTexture(texture);
     this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     this.appearance.setEmission(0.6, 0.6, 0.6, 1);
 

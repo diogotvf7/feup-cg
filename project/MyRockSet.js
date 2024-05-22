@@ -15,7 +15,7 @@ import { Position } from './Position.js';
  * @param normals_direction - Direction of normals
  */
 export class MyRockSet extends CGFobject {
-  constructor(scene, number_of_rocks) {
+  constructor(scene, texture, number_of_rocks) {
     super(scene);
 
     this.rocks = []
@@ -25,7 +25,7 @@ export class MyRockSet extends CGFobject {
     let scale = 2;
     let size = 2;
     for (let i = 0; i < number_of_rocks; i++) {
-      this.rocks.push(new MyRock(scene, new Position(0, current_y, 0), 20, 10, size, scale, 1, scale));
+      this.rocks.push(new MyRock(scene, texture, new Position(0, current_y, 0), 20, 10, size, scale, 1, scale));
       current_y += size*1.5;
       if(scale - 0.3 > 1) scale -= 0.3;
       size -= 0.4;

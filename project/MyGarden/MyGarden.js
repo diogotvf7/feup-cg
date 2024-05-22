@@ -14,6 +14,13 @@ export class MyGarden extends CGFobject {
     this.height = height;
     this.flowers = [];
 
+    this.textures = [
+      new CGFtexture(scene, 'images/textures/plant.jpg'),
+      new CGFtexture(scene, 'images/textures/flower-heart.jpg'),
+      new CGFtexture(scene, 'images/textures/flower-stem.jpg'),
+    ];
+
+
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
         if(Math.random() < odd) {
@@ -44,6 +51,7 @@ export class MyGarden extends CGFobject {
                 Math.random(),
                 Math.random(),
               ],  // leafColour
+              this.textures
           ));
         }
       }

@@ -35,14 +35,16 @@ export class MyScene extends CGFscene {
     this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
     this.gl.enable(this.gl.BLEND);
 
+    this.rockTexture = new CGFtexture(this, 'images/textures/lichen/lichen_diff.jpg');
+
     // Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 20, 20, 1, -1);
     this.garden = new MyGarden(this, 10, 10, 0.5);
 
-    this.rock = new MyRock(this, new Position(-5, 0, 0), 20, 20);
-    this.rockSet = new MyRockSet(this, 4);
+    this.rock = new MyRock(this, this.rockTexture, new Position(-5, 0, 0), 20, 20);
+    this.rockSet = new MyRockSet(this, this.rockTexture, 4);
 
     this.pollen = new MyPollen(this, new Position(0, 0, 0), 1);
     this.grass = new MyGrassSquare(this, new Position(0, -100, 0), 30, 30);

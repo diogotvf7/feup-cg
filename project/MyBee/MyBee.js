@@ -259,7 +259,7 @@ export class MyBee extends CGFobject {
       targetPosition.z += target.stem.topCenter[2];
     } 
     if (target instanceof MyHive) {
-      targetPosition.y += target.height;
+      targetPosition.y += target.height + 3;
     }
 
     // Calculate the direction vector towards the target

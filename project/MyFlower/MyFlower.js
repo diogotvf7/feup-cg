@@ -1,4 +1,4 @@
-import {CGFappearance, CGFobject, CGFtexture} from '../../lib/CGF.js';
+import {CGFappearance, CGFobject} from '../../lib/CGF.js';
 import { MyPollen } from '../MyPollen.js';
 import {MySphere} from '../MySphere.js';
 
@@ -15,7 +15,7 @@ import {Position} from '../Position.js';
 export class MyFlower extends CGFobject {
   constructor(
       scene, position, nPetals, petalColour, heartRadius, heartColour, stemRadius,
-      stemSize, stemColour, leafColour) {
+      stemSize, stemColour, leafColour, textures) {
     super(scene);
 
     this.position = position;
@@ -29,35 +29,30 @@ export class MyFlower extends CGFobject {
     this.stemColour = stemColour;
     this.leafColour = leafColour;
 
-    this.petalTexture = new CGFtexture(scene, 'images/textures/plant.jpg');
     this.petalApperance = new CGFappearance(scene);
-    this.petalApperance.setTexture(this.petalTexture);
+    this.petalApperance.setTexture(textures[0]);
     this.petalApperance.setTextureWrap('REPEAT', 'REPEAT');
     this.petalApperance.setAmbient(...petalColour, 1);
     this.petalApperance.setDiffuse(...petalColour, 1);
     this.petalApperance.setSpecular(...petalColour, 1);
 
-    this.heartTexture =
-        new CGFtexture(scene, 'images/textures/flower-heart.jpg');
     this.heartApperance = new CGFappearance(scene);
-    this.heartApperance.setTexture(this.heartTexture);
+    this.heartApperance.setTexture(textures[1]);
     this.heartApperance.setTextureWrap('REPEAT', 'REPEAT');
     this.heartApperance.setAmbient(...heartColour, 1);
     this.heartApperance.setDiffuse(...heartColour, 1);
     this.heartApperance.setSpecular(...heartColour, 1);
 
 
-    this.stemTexture = new CGFtexture(scene, 'images/textures/flower-stem.jpg');
     this.stemApperance = new CGFappearance(scene);
-    this.stemApperance.setTexture(this.stemTexture);
+    this.stemApperance.setTexture(textures[2]);
     this.stemApperance.setTextureWrap('REPEAT', 'REPEAT');
     this.stemApperance.setAmbient(...stemColour, 1);
     this.stemApperance.setDiffuse(...stemColour, 1);
     this.stemApperance.setSpecular(...stemColour, 1);
 
-    this.leafTexture = new CGFtexture(scene, 'images/textures/plant.jpg');
     this.leafApperance = new CGFappearance(scene);
-    this.leafApperance.setTexture(this.leafTexture);
+    this.leafApperance.setTexture(textures[0]);
     this.leafApperance.setTextureWrap('REPEAT', 'REPEAT');
     this.leafApperance.setAmbient(...leafColour, 1);
     this.leafApperance.setDiffuse(...leafColour, 1);
