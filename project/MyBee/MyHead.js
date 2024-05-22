@@ -44,7 +44,9 @@ export class MyHead extends CGFobject {
         [-.2, .4],
         [1, .6],
         [0, .8]
-      ]
+      ],
+      15,
+      10
     );
     this.right_antennae = new MyBezierCylinder(
       scene,
@@ -62,19 +64,13 @@ export class MyHead extends CGFobject {
         [-.2, .4],
         [1, .6],
         [0, .8]
-      ]
+      ],
+      15,
+      10
     );
     this.mandibles = new MyBezierCylinder(
       scene,
       .3,
-      // [
-      //   [.1,  .4],
-      //   [1,   0],
-      //   [0,   0],
-      //   [0,   0],
-      //   [-1,  0],
-      //   [-.1, .4],
-      // ],
       [
         [.1,  .4],
         [1,   0],

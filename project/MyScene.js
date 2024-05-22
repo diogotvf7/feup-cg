@@ -50,7 +50,7 @@ export class MyScene extends CGFscene {
       new MyRockSet(this, this.rockTexture, 4, new Position(25, 0, -30))
     ];
     this.rocks = []
-    this.hive = new MyHive(this, new Position(30, 0, -30), 5, 10);
+    this.hive = new MyHive(this, new Position(0, 0, 0), 5, 10);
     
     // Generate random rocks and rockSets
     for (let i = 0; i < 10; i++) {
@@ -101,7 +101,9 @@ export class MyScene extends CGFscene {
   }
   initCameras() {
     this.camera = new CGFcamera(
-      1.5, 0.1, 1000, vec3.fromValues(0, 20, 0), vec3.fromValues(10, 15, 10));
+      1.5, 0.1, 1000, vec3.fromValues(5, 5, 5), vec3.fromValues(0, 0, 0));
+    // this.camera = new CGFcamera(
+    //   1.5, 0.1, 1000, vec3.fromValues(0, 20, 0), vec3.fromValues(10, 15, 10));
   }
   setDefaultAppearance() {
     this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -128,12 +130,14 @@ export class MyScene extends CGFscene {
 
     this.panorama.display();
 
-    this.rockSets.forEach(rockSet => rockSet.display());
-    this.rocks.forEach(rock => rock.display());
+    // this.rockSet.display();
+
+    // this.rock.display();
 
     this.garden.display();
 
     this.hive.display();
+    
     this.grass.display();
 
     this.plane.display();
