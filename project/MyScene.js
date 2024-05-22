@@ -43,22 +43,25 @@ export class MyScene extends CGFscene {
     this.sphere = new MySphere(this, 20, 20, 1, -1);
     
     this.pollen = new MyPollen(this, new Position(0, 0, 0), 1);
-    this.garden = new MyGarden(this, 20, 20, 0.5);
-    this.grass = new MyGrassSquare(this, new Position(40, 0, 40), 70, 70);
-    
-    this.rockSets = [
-      new MyRockSet(this, this.rockTexture, 4, new Position(25, 0, -30))
-    ];
-    this.rocks = []
+    this.garden = new MyGarden(this, new Position(-40, 0, -40), 20, 20, .7);
+    this.grass = new MyGrassSquare(this, new Position(0, 0, 0), 150, 150);
     this.hive = new MyHive(this, new Position(0, 0, 0), 5, 10);
     
-    // Generate random rocks and rockSets
-    for (let i = 0; i < 10; i++) {
-      this.rocks.push(new MyRock(this, this.rockTexture, new Position(
-        - Math.random() * 60,
-        0,
-        - Math.random() * 60,
-      ), 20, 20, Math.random() * 4));
+    this.rockSets = [];
+    this.rocks = [];
+
+    for (let i = 0; i < 100; i++) {
+      const dir = Math.random() * 2 * Math.PI;
+      const shiftAppens = 40 + Math.random() * 150;
+
+      const x = Math.cos(dir) * shiftAppens;
+      const z = Math.sin(dir) * shiftAppens;
+
+      if (Math.random() < 0.8) {
+        this.rocks.push(new MyRock(this, this.rockTexture, new Position(x, 0, z), 20, 20, Math.random() * 4));
+      } else {
+        this.rockSets.push(new MyRockSet(this, this.rockTexture, 4, new Position(x, 0, z)));        
+      }
     }
 
     this.bee = new MyBee(this, this.garden, this.hive);
@@ -130,14 +133,14 @@ export class MyScene extends CGFscene {
 
     this.panorama.display();
 
-    // this.rockSet.display();
+    this.rockSets.forEach(rockSet => rockSet.display());
 
-    // this.rock.display();
-
-    this.garden.display();
+    this.rocks.forEach(rock => rock.display());
 
     this.hive.display();
     
+    this.garden.display();
+
     this.grass.display();
 
     this.plane.display();

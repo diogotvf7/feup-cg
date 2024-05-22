@@ -8,8 +8,9 @@ import { Position } from '../Position.js';
  * @param scene - Reference to MyScene object
  */
 export class MyGarden extends CGFobject {
-  constructor(scene, width, height, odd) {
+  constructor(scene, position, width, height, odd) {
     super(scene);
+    this.position = position;
     this.width = width;
     this.height = height;
     this.flowers = [];
@@ -20,10 +21,9 @@ export class MyGarden extends CGFobject {
       new CGFtexture(scene, 'images/textures/flower-stem.jpg'),
     ];
 
-
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
-        if(Math.random() < odd) {
+        if (Math.random() < odd && (this.notIn(.2, j, width) || this.notIn(.2, i, height))) {
           this.flowers.push(new MyFlower(
               scene, // scene
               new Position(j * 4, 0, i * 4),
@@ -57,9 +57,14 @@ export class MyGarden extends CGFobject {
       }
     }
   }
+  notIn(gap, i, max) {
+    const half = max * gap / 2;
+    const inteval = [max / 2 - half, max / 2 + half];
+    return i < inteval[0] || i > inteval[1];
+  }
   display() {
     this.scene.pushMatrix();
-    //this.scene.translate(-this.width, 0, -this.height);
+    this.scene.translate(this.position.x, this.position.y, this.position.z);
     this.flowers.forEach((flower) => {
       flower.display();
     });

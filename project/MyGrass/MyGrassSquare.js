@@ -26,8 +26,6 @@ export class MyGrassSquare extends CGFobject {
       )));
     }
   }
-
-
   display() {
     this.scene.pushMatrix(); 
 
