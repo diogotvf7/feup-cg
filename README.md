@@ -6,6 +6,7 @@
 | Diogo Tomás Valente Fernandes | 202108752 | up202108752@edu.fe.up.pt  |
 | João Torre Onofre Pereira     | 202108848 | up202108848@fe.up.pt      |
 
+
 ----
 
   - [tp1](tp1/README.md)
